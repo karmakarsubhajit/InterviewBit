@@ -132,3 +132,71 @@ void Solution::solve(vector<vector<char> > &A) {
         }
     }
 }
+
+
+//FloodFill approach(slight variation of DFS)
+
+
+
+
+void floodFill(int x, int y, int m, int n, vector<vector<char>> &A, char prev, char pres)
+{
+    if(x==m || y==n || x==-1 || y==-1)
+        return;
+    if(A[x][y]!=prev)
+        return;
+    A[x][y]=pres;
+    floodFill(x+1,y,m,n,A,prev,pres);
+    floodFill(x-1,y,m,n,A,prev,pres);
+    floodFill(x,y+1,m,n,A,prev,pres);
+    floodFill(x,y-1,m,n,A,prev,pres);
+}
+
+void Solution::solve(vector<vector<char> > &A) {
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+    int m = A.size();
+    int n = A[0].size();
+    
+
+    for(int k=0;k<n;k++)
+    {
+        if(A[0][k]=='O')
+        {
+            floodFill(0,k,m,n,A,'O','P');
+        }
+        if(A[m-1][k]=='O')
+        {
+            floodFill(m-1,k,m,n,A,'O','P');
+        }
+    }
+    for(int k=0;k<m;k++)
+    {
+        if(A[k][0]=='O')
+        {
+            floodFill(k,0,m,n,A,'O','P');
+        }
+        if(A[k][n-1]=='O')
+        {
+            floodFill(k,n-1,m,n,A,'O','P');
+        }
+    }
+    
+
+    for(int i=0;i<m;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            if(A[i][j]=='O')
+            {
+                A[i][j]='X';
+            }
+            else if(A[i][j]=='P')
+            {
+                A[i][j]='O';
+            }
+        }
+    }
+}
