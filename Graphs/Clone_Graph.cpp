@@ -4,37 +4,31 @@
 // Time Complexity:- O(V+E)
 // Space Complexity:- O(V)
 
-/**
- * Definition for undirected graph.
- * struct UndirectedGraphNode {
- *     int label;
- *     vector<UndirectedGraphNode *> neighbors;
- *     UndirectedGraphNode(int x) : label(x) {};
- * };
- */
 
-void dfs(UndirectedGraphNode* node, map<int, UndirectedGraphNode*>& mp)
+void dfs(UndirectedGraphNode* node, map<UndirectedGraphNode*, UndirectedGraphNode*>& mp)
 {
-    mp[node->label] = new UndirectedGraphNode(node->label);
+    mp[node] = new UndirectedGraphNode(node->label);
     for(auto p:node->neighbors)
     {
-        if(!mp[p->label])
+        if(!mp[p])
         {
             dfs(p,mp);
         }
-        mp[node->label]->neighbors.push_back(mp[p->label]);
+        mp[node]->neighbors.push_back(mp[p]);
     }
 }
-
+ 
 UndirectedGraphNode *Solution::cloneGraph(UndirectedGraphNode *node) 
 {
-
-    map<int, UndirectedGraphNode*> mp;
+ 
+    map<UndirectedGraphNode*, UndirectedGraphNode*> mp;
     dfs(node,mp);
-    return mp[node->label];
+    return mp[node];
 }
 
 
+
+/***********************/
 
 //BFS solution
 // Time Complexity:- O(V+E)
@@ -52,26 +46,27 @@ UndirectedGraphNode *Solution::cloneGraph(UndirectedGraphNode *node)
 
 UndirectedGraphNode *Solution::cloneGraph(UndirectedGraphNode *node) 
 {
-    map<int, UndirectedGraphNode*> mp;
+    map<UndirectedGraphNode*, UndirectedGraphNode*> mp;
     queue<UndirectedGraphNode*> q;
     q.push(node);
-    mp[node->label] =  new UndirectedGraphNode(node->label);
+    mp[node] =  new UndirectedGraphNode(node->label);
     while(q.empty()==0)
     {
         UndirectedGraphNode* temp = q.front();
         q.pop();
         for(auto p:temp->neighbors)
         {
-            if(!mp[p->label])
+            if(!mp[p])
             {
                 q.push(p);
-                mp[p->label] = new UndirectedGraphNode(p->label);
+                mp[p] = new UndirectedGraphNode(p->label);
             }
                 
-            mp[temp->label]->neighbors.push_back(mp[p->label]);
+            mp[temp]->neighbors.push_back(mp[p]);
         }
     }
 
-    return mp[node->label];
+    return mp[node];
 }
+
 
