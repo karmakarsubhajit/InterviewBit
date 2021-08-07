@@ -35,3 +35,4 @@ ListNode* Solution::rotateRight(ListNode* A, int B)
     temp->next = NULL;
     return tempHead;
 }
+
