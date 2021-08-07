@@ -5,16 +5,14 @@
 
 
 int Solution::numSetBits(unsigned int A) {
-      int c = 0;
+  
+    int c = 0;
     if(A==0)
         return 0;
-    while(1)
+    while(A!=0)
     {
-        int t =A&(A-1);
+        A =A&(A-1);
         c++;
-        if(t==0)
-            break;
-        A=t;
             
     }
     return c;
