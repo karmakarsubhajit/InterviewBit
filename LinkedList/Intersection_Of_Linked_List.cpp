@@ -72,3 +72,29 @@ ListNode* Solution::getIntersectionNode(ListNode* A, ListNode* B) {
     return t1;
 
 }
+
+
+// Alternate Solution
+
+//Time complexity:- O(m+n)
+//Space complexity:- O(1)
+
+ListNode* Solution::getIntersectionNode(ListNode* A, ListNode* B) {
+    if(!A || !B)
+      return NULL;
+   
+    ListNode* m = A;
+    ListNode* n = B;
+    while(m!=n)
+    {
+        if(m==NULL)
+            m=B;
+        else
+            m = m->next;
+        if(n==NULL)
+            n=A;
+        else
+            n = n->next;
+    }
+    return m;
+}
