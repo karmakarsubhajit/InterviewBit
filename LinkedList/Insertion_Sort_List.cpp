@@ -30,7 +30,7 @@ ListNode* Solution::insertionSortList(ListNode* head)
             head->next = prev->next;
             prev->next = head;
             head=nextNode;
-            
+             
         }
         return dummy->next;
 }
