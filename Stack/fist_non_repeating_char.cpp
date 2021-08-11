@@ -49,6 +49,9 @@ Explanation 2:
 
 */
 
+//Time complexity:- O(n)
+//Space complexity:- O(n)
+
 string Solution::solve(string A) 
 {
     vector<int> v(26,0);
