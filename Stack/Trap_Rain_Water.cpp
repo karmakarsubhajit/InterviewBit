@@ -56,3 +56,47 @@ int Solution::trap(const vector<int> &A)
     }
     return s;
 }
+
+// Time complexity:- O(n)
+// Space complexity:- O(1)
+// One pass solution, two variables used to keep track of leftMax and rightMax
+
+int Solution::trap(const vector<int> &A) 
+{
+    int n = A.size();
+    int l =0;
+    int leftMax = 0;
+    int rightMax = 0;
+    int r = n-1;
+    int s = 0;
+    while(l<=r)
+    {
+        if(A[l]<A[r])
+        {
+            if(A[l]>leftMax)
+            {
+                leftMax = A[l];
+            }
+            else
+            {
+                s +=leftMax-A[l];
+            }
+            l++;
+        }
+        else
+        {
+            if(A[r]>rightMax)
+            {
+                rightMax = A[r];
+            }
+            else
+            {
+                s+=rightMax-A[r];
+            }
+            r--;
+        }
+    }
+
+    
+    return s;
+}
