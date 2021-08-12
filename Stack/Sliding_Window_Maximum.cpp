@@ -85,7 +85,7 @@ vector<int> Solution::slidingMaximum(const vector<int> &A, int B)
         while(!deQ.empty() && A[i]>=A[deQ.back()])
             deQ.pop_back(); 
         deQ.push_back(i);
-    }
+    } 
     ans.push_back(A[deQ.front()]);
     return ans;
 }
