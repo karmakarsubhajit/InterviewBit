@@ -80,4 +80,33 @@ int Solution::canCompleteCircuit(const vector<int> &A, const vector<int> &B)
    return start;
 }
 
+// Optimal Soln
+// Time complexity:- O(n)
+// Space complexity:- O(1)
+
+int Solution::canCompleteCircuit(const vector<int> &A, const vector<int> &B) 
+{
+   int totalGas = 0;
+   int totalCost = 0;
+   int s = 0;
+   int remGas = 0;
+   for(int i=0;i<A.size();i++)
+   {
+       totalGas+=A[i];
+       totalCost+=B[i];
+       remGas += A[i] - B[i];
+       if(remGas<0)
+       {
+           s=i+1;
+           remGas=0;
+       }
+   }
+   if(totalGas<totalCost)
+   {
+       return -1;
+   }
+   else
+        return s;
+}
+
 
