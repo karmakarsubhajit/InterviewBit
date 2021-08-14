@@ -109,4 +109,3 @@ int Solution::canCompleteCircuit(const vector<int> &A, const vector<int> &B)
         return s;
 }
 
-
