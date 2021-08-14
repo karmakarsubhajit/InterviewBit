@@ -61,3 +61,47 @@ int Solution::candy(vector<int> &A)
     return sm;
 }
 
+// Time complexity:- O(n)
+// Space complexity:- O(1)
+
+int Solution::candy(vector<int> &A) 
+{
+    int n = A.size();
+    if((n==0) || (n==1))
+        return n;
+    int cand = 1;
+    int sm = 1;
+    int i = 1;
+    while(i<n)
+    {
+        if(A[i]<A[i-1])
+        {
+            int c = 0;
+            while(A[i]<A[i-1] && (i<n))
+            {
+                c++;
+                i++;
+            }
+            if(c>=cand)
+            {
+                sm = sm - (cand) +(c+1);
+            }
+            sm+=(c*(c+1))/2;
+            cand = 1;
+        }
+        else if(A[i]>A[i-1])
+        {
+            cand++;
+            sm+= cand;
+            i++;
+        }
+        else
+        {
+            cand = 1;
+            sm+= cand;
+            i++;
+        }
+    }
+    return sm;
+}
+
