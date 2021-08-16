@@ -63,17 +63,18 @@ vector<int> Solution::solve(vector<vector<int>> &A)
 
 
 
+// Optimal Soln
+// Time Complexity:- O(n+nk(log(k)) = O(nk(log(k)) 
+// Space Complexity:- O(k+n)
+
+
+
 class compare{
     public:
     bool operator()(pair<int,int> &p1, pair<int,int> &p2){
         return p1.first > p2.first;
     }
 };
-
-// Optimal Soln
-// Time Complexity:- O(n+nk(log(k)) = O(nk(log(k)) 
-// Space Complexity:- O(k+n)
-
 
 vector<int> Solution::solve(vector<vector<int>> &A) 
 {
