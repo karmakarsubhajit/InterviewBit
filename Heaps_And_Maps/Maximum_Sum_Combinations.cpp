@@ -83,7 +83,7 @@ vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C)
 }
 
 // Space complexity:- O(C)
-// Time complexity:- O(ClogC)  if C ~ O(n), then O(nlogn)
+// Time complexity:- O(nlogn) 
 
 vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C) 
 {
