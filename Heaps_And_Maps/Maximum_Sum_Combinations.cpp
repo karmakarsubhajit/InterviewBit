@@ -121,3 +121,36 @@ vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C)
     return ans;
 }
 
+// Space complexity:- O(C)
+// Time complexity:- O(nlogn) 
+
+vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C) 
+{
+    int n = B.size();
+    sort(A.begin(), A.end());
+    sort(B.begin(), B.end());
+    set<pair<int,pair<int,int>>,greater<>> s;
+    s.insert({A[n-1]+B[n-1],{n-1,n-1}});
+    vector<int> ans;
+    
+    while(C--)
+    {
+        auto it = s.begin();
+        int sm = (*it).first;
+        int x = (*it).second.first;
+        int y = (*it).second.second;
+        ans.push_back(sm);
+        pair<int,int> a= make_pair(x-1,y);
+         s.erase(*it);
+        if(x>=1)
+        {
+            s.insert({A[x-1]+B[y],a});
+        }
+        pair<int,int> b= make_pair(x,y-1);
+        if(y>=1)
+        {
+            s.insert({A[x]+B[y-1],b});
+        }
+    }
+    return ans;
+}
