@@ -49,6 +49,7 @@ int Solution::findMinXor(vector<int> &A)
 
 
 // Optimal soln
+// Elements which are closer to each other have more no of same bits at similar position and on xoring them, they become zero
 // Time complexity:- O(nlogn)
 // Space complexity:- O(1)
 
