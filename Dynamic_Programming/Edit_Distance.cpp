@@ -162,3 +162,50 @@ int Solution::minDistance(string A, string B)
     return dp[m][n];
 }
 
+
+// Tabular Solution Optimal Space using two vectors
+// Time complexity:- O(m*n)
+// Space complexity:- O(n)
+
+int Solution::minDistance(string A, string B) 
+{
+    int m = A.size();
+    int n = B.size();
+    if(m==0)
+        return n;
+    if(n==0)
+        return m;
+    
+    vector<vector<int>> dp(2 , vector<int>(n+1,0));
+ 
+    for(int j=0;j<=n;j++)
+        dp[0][j]=j;
+        
+    int curr;
+    int prev;
+
+    for(int i=1;i<=m;i++)
+    {
+        curr = i%2;
+        prev = 1-curr;
+        for(int j=0;j<=n;j++)
+        {
+            if(j==0)
+            {
+                dp[curr][0]=i;
+            }
+            else if(A[i-1]==B[j-1])
+            {
+                dp[curr][j] = dp[prev][j-1];
+            }
+            else
+            {
+                int ins = 1+dp[curr][j-1];
+                int del = 1+dp[prev][j];
+                int rem = 1+dp[prev][j-1];
+                dp[curr][j] = min(min(ins,del),rem);
+            }
+        } 
+    }
+    return dp[curr][n];
+}
