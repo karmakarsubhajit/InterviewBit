@@ -127,3 +127,37 @@ int Solution::solve(string A, string B)
     }
     return dp[m][n];
 }
+
+// Tabulation soln | Space optimized two row vectors used
+// Time complexity:- O(m*n)
+// Space complexity:- O(n)
+
+int Solution::solve(string A, string B) 
+{
+    int m = A.length();
+    int n = B.length();
+    if(A==B)
+        return m;
+    if(m==0 || n==0)
+        return 0;
+    vector<vector<int>> dp(2, vector<int>(n+1,0));
+    int curr, prev;
+    for(int i=1;i<=m;i++)
+    {
+        curr = i%2;
+        prev = 1-curr;
+        for(int j=1;j<=n;j++)
+        {
+            if(A[i-1]==B[j-1])
+            {
+                dp[curr][j]=1+dp[prev][j-1];
+            }
+            else
+            {
+                dp[curr][j]=max(dp[prev][j],dp[curr][j-1]);
+            }
+        }
+    }
+    return dp[curr][n];
+}
+
