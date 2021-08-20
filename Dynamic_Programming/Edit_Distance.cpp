@@ -75,3 +75,47 @@ int Solution::minDistance(string A, string B)
     
     return editDistance(A,B,i,j,m,n);
 }
+
+// Memoization Solution
+// Time complexity:- O(m*n)
+// Space complexity:- O(m*n)
+
+
+int editDistance(string A, string B, int i, int j, int m, int n, vector<vector<int>>& dp)
+{
+    if(dp[i][j]!=-1)
+        return dp[i][j];
+    if(i==m)
+    {
+        dp[i][j] = n-j;
+        return n-j;
+    }
+    
+    if(j==n)
+    {
+        dp[i][j] = m-i;
+        return m-i;
+    }    
+    if(A[i]==B[j])
+    {
+        dp[i][j] = editDistance(A, B, i+1, j+1, m, n, dp);
+    }
+    else
+    {
+        dp[i][j]= 1+min(min(editDistance(A, B, i+1,j , m ,n, dp ), editDistance(A, B, i,j+1,m ,n, dp)), editDistance(A, B, i+1,j+1,m,n, dp));
+    }
+    return dp[i][j];
+}
+int Solution::minDistance(string A, string B) 
+{
+    int m = A.size();
+    int n = B.size();
+    if(m==0)
+        return n;
+    if(n==0)
+        return m;
+    int i=0;
+    int j=0;
+    vector<vector<int>> dp(m+1 , vector<int>(n+1,-1));
+    return editDistance(A, B, i, j, m, n, dp);
+}
