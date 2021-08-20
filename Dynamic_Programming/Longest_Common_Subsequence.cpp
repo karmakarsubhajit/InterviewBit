@@ -161,3 +161,47 @@ int Solution::solve(string A, string B)
     return dp[curr][n];
 }
 
+
+
+// Tabulation soln | Space optimized one vectors used | Linear space soln
+// Time complexity:- O(m*n)
+// Space complexity:- O(n)
+
+
+int Solution::solve(string A, string B) 
+{
+    int m = A.length();
+    int n = B.length();
+    if(A==B)
+        return m;
+    if(m==0 || n==0)
+        return 0;
+    vector<vector<int>> dp(1, vector<int>(n+1,0));
+    int prev_j, corner;
+    for(int i=1;i<=m;i++)
+    {
+        for(int j=0;j<=n;j++)
+        {
+            if(j==0)
+            {
+                prev_j = 0;
+                corner = 0;
+            }
+            else if(A[i-1]==B[j-1])
+            {
+                int temp = dp[0][j];                
+                dp[0][j] = 1+corner;
+                prev_j = dp[0][j];
+                corner = temp;
+            }
+            else
+            {
+                corner = dp[0][j];
+                dp[0][j] = max(dp[0][j], prev_j);
+                prev_j = dp[0][j];
+            }
+        }
+    }
+    return dp[0][n];
+}
+
