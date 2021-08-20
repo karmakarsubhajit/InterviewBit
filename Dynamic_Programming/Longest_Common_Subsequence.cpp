@@ -64,7 +64,7 @@ int Solution::solve(string A, string B)
 
 // Memoization soln
 // Time complexity:- O(m*n)
-// Space complexity:- O(max(m,n))
+// Space complexity:- O(m*n)
 
 int getLCS(string A, string B, int i, int j, int m, int n, vector<vector<int>>& dp)
 {
