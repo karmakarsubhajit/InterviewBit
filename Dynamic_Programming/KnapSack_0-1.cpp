@@ -50,9 +50,35 @@ Explanation 2:
  Knapsack capacity is 10 but each item has weight greater than 10 so no items can be considered in the knapsack therefore answer is 0.
 */
 
+
+
+// Recursive Brute Force soln
+// Time complexity:- O(2^n), where n is the no of items
+// Space complexity:- O(n)
+
+
+int getKnapsackValue(vector<int>& values, vector<int>& weights, int W, int n)
+{
+    if(W==0)
+        return 0;
+    if(n=0)
+        return 0;
+    int ans;
+    ans = getKnapsackValue(values, weights, W, n-1);    
+    if(W>=weights[n-1])
+        ans = max(ans, values[n-1]+getKnapsackValue(values, weights, W-weights[n-1] ,n-1));
+    return ans;
+}
+ 
+int Solution::solve(vector<int> &A, vector<int> &B, int C) 
+{
+    int n = A.size();
+    return getKnapsackValue(A,B,C,n);
+}
+
 // DP-Memoization soln
-// Time complexity:- O(W*C)
-// Space complexity:- O(W*C)
+// Time complexity:- O(C*n), where C is the capacity and n is the no of items
+// Space complexity:- O(C*n)
 
 int getKnapsackValue(vector<int>& values, vector<int>& weights, int W, int n, vector<vector<int>>& dp)
 {
