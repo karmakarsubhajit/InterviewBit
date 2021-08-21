@@ -28,6 +28,9 @@ Output 1:
  13
 */
 
+//Time complexity:- O(1)
+//Space complexity:- O(1)
+
 int Solution::solve(int A, int B) 
 {
     int mn = min(A, B);
