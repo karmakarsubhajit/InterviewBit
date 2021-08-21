@@ -84,29 +84,29 @@ int getKnapsackValue(vector<int>& values, vector<int>& weights, int W, int n, ve
 {
     if(n==0)
     {
-        dp[W][n]=0;
+        dp[n][W]=0;
         return 0;
     }
     if(W==0)
     {
-        dp[W][n]=0;
+        dp[n][W]=0;
         return 0;
     }
-
-    if(dp[W][n]!=-1)
-        return dp[W][n];    
+ 
+    if(dp[n][W]!=-1)
+        return dp[n][W];    
     int ans;
     ans = getKnapsackValue(values, weights, W, n-1, dp);    
     if(W>=weights[n-1])
         ans = max(ans, values[n-1]+getKnapsackValue(values, weights, W-weights[n-1] ,n-1, dp));
-    dp[W][n] = ans;
+    dp[n][W] = ans;
     return ans;
 }
-
+ 
 int Solution::solve(vector<int> &A, vector<int> &B, int C) 
 {
     int n = A.size();
-    vector<vector<int>> dp(C+1,vector<int>(n+1,-1));
+    vector<vector<int>> dp(n+1,vector<int>(C+1,-1));
     return getKnapsackValue(A,B,C,n,dp);
 }
 
