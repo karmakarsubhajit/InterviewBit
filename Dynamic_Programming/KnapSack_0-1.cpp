@@ -111,3 +111,26 @@ int Solution::solve(vector<int> &A, vector<int> &B, int C)
 }
 
 
+// DP-Tabular soln
+// Time complexity:- O(C*n), where C is the capacity and n is the no of items
+// Space complexity:- O(C*n)
+
+
+int Solution::solve(vector<int> &A, vector<int> &B, int C) 
+{
+    int n = A.size();
+    vector<vector<int>> dp(n+1,vector<int>(C+1,0));
+    
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=C;j++)
+        {
+            int ans;
+            ans = dp[i-1][j];
+            if(j>=B[i-1])
+                ans = max(ans,A[i-1]+dp[i-1][j-B[i-1]]);
+            dp[i][j] = ans;
+        }
+    }
+    return dp[n][C];    
+}
