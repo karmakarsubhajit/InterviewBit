@@ -44,15 +44,15 @@ AB -> 28
 // Time complexity:- O(n), n is length of string
 // Space complexity:- O(1)
 
-int Solution::titleToNumber(string A) 
+string Solution::convertToTitle(int A) 
 {
-    int l = A.length();
-    int t =1;
-    int sm = 0;
-    for(int i=l-1;i>=0;i--)
-    {
-        sm+=t*(A[i]-'A'+1);
-        t=t*26;
-    } 
-    return sm;
+    string ans = "";
+    while(A)
+    {        
+        ans+=((A-1)%26+'A');
+        A=(A-1)/26;
+       
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
 }
