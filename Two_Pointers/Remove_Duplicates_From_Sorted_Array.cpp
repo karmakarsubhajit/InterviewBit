@@ -49,10 +49,7 @@ We return 3 from here.
 // Space complexity:- O(1)
 
 int Solution::removeDuplicates(vector<int> &A) {
-    // Do not write main() function.
-    // Do not read input, instead use the arguments to the function.
-    // Do not print the output, instead return values as specified
-    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+
     int n = A.size();
     if(n<=1)
         return n;
@@ -89,4 +86,30 @@ int Solution::removeDuplicates(vector<int> &A) {
     }
  
     return k;
+}
+
+
+// CLeaner code
+// Time complexity:- O(n)
+// Space complexity:- O(1)
+
+
+int Solution::removeDuplicates(vector<int> &A) {
+
+    int cnt = 0;
+    int n = A.size();
+    for(int i=0;i<n;i++)
+    {
+        if((i<(n-1)) && (A[i]==A[i+1]))
+        {
+            continue;
+
+        }
+        else
+        {
+            A[cnt] = A[i];
+            cnt++; 
+        }
+    }
+    return cnt;
 }
