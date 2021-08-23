@@ -65,6 +65,31 @@ int Solution::solve(vector<int> &A, int B)
     return 0;
 }
 
+// Ordered map is used
+// Time complexity:- O(nlogn)
+// Space complexity:- O(1)
+
+int Solution::solve(vector<int> &A, int B) 
+{
+    int n = A.size();
+    if(n<=1)
+        return 0;
+    sort(A.begin(), A.end());
+    int i=0;
+    int j=1;
+    while(i<n && j<n)
+    {
+        int diff = A[j]-A[i];
+        if((i!=j) && (diff==B))
+            return 1;
+        else if(diff>B)
+            i++;
+        else
+            j++;
+    }
+    return 0;
+}
+
 
 
 // Ordered map is used
