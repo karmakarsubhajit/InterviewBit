@@ -65,8 +65,8 @@ int Solution::solve(vector<int> &A, int B)
     return 0;
 }
 
-// Ordered map is used
-// Time complexity:- O(nlogn)
+// Sorting
+// Time complexity:- O(nlogn+n) = O(nlogn)
 // Space complexity:- O(1)
 
 int Solution::solve(vector<int> &A, int B) 
@@ -93,7 +93,7 @@ int Solution::solve(vector<int> &A, int B)
 
 
 // Ordered map is used
-// Time complexity:- O(nlogn+n)
+// Time complexity:- O(nlogn+n) = O(nlogn)
 // Space complexity:- O(n)
 
 int Solution::solve(vector<int> &A, int B) 
