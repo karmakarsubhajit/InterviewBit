@@ -65,6 +65,50 @@ int Solution::solve(vector<int> &A, int B)
     return 0;
 }
 
+
+// Binary Search is used
+// Time complexity:- O(nlogn+nlogn)= O(nlogn)
+// Space complexity:- O(1)
+
+int binarySearch(vector<int> arr, int l, int r, int x)
+{
+    while (l <= r) {
+        int m = l + (r - l) / 2;
+  
+
+        if (arr[m] == x)
+            return 1;
+
+        if (arr[m] < x)
+            l = m + 1;
+  
+        else
+            r = m - 1;
+    }
+
+    return 0;
+}
+  
+
+int Solution::solve(vector<int> &A, int B) 
+{
+    int n = A.size();
+    if(n<=1)
+        return 0;
+    sort(A.begin(), A.end());
+    if(B<0)
+        B=-1*B;
+    for(int i=0;i<n;i++)
+    {
+        int t = A[i]+B;
+        int ans = binarySearch(A,i+1,n-1,t);
+        if(ans)
+            return 1;
+    }
+    return 0;
+}
+
+
 // Sorting
 // Time complexity:- O(nlogn+n) = O(nlogn)
 // Space complexity:- O(1)
