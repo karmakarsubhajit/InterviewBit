@@ -50,3 +50,25 @@ void Solution::merge(vector<int> &A, vector<int> &B) {
     }
 
 }
+
+// Time complexity:- O(mlogm+nlogn)
+// Space complexity:- O(m+n)
+
+void Solution::merge(vector<int> &A, vector<int> &B) {
+
+    int m = A.size();
+    int n = B.size();
+    map<int,int> mp;
+
+    for(auto i:A)
+        mp[i]++;
+    for(auto i:B)
+        mp[i]++;
+    A.clear();
+    for(auto it:mp)
+    {
+        for(int j=0;j<it.second;j++)
+            A.push_back(it.first);
+    }
+}
+
