@@ -42,12 +42,36 @@ Explanation 2:
  Pair (20, -10) gives a difference of 30 i.e 20 - (-10) => 20 + 10 => 30
 */
 
+// Ordered map is used
 // Time complexity:- O(nlogn+n)
 // Space complexity:- O(n)
 
 int Solution::solve(vector<int> &A, int B) 
 {
     map<int,int> mp;
+    for(int i=0;i<A.size();i++)
+        mp[A[i]]++;
+    
+    for(int i=0;i<A.size();i++)
+    {
+        if(B==0)
+        {
+            if(mp[A[i]]>=2)
+                return 1;
+        }
+        else if(mp[A[i]+B]>=1)
+            return 1;
+    }
+    return 0;
+}
+
+// Unordered map is used
+// Time complexity:- O(n)
+// Space complexity:- O(n)
+
+int Solution::solve(vector<int> &A, int B) 
+{
+    unordered_map<int,int> mp;
     for(int i=0;i<A.size();i++)
         mp[A[i]]++;
     
