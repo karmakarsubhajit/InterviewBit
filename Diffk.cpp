@@ -43,3 +43,31 @@ int Solution::diffPossible(vector<int> &A, int B)
     }
     return 0;
 }
+
+
+// Using Two pointers
+// Time complexity:-O(n)
+// Space complexity:- O(1)
+
+int Solution::diffPossible(vector<int> &A, int B) 
+{
+    if(A.size()<=1)
+        return 0;
+    int n = A.size();
+    int i = 0;
+    int j = 1;
+    while(i<n && j<n)
+    {
+        int diff = A[j]-A[i];
+        if(diff==B && i!=j)
+        {
+            return 1;
+        }
+        else if(diff>B)
+            i++;
+        else
+            j++;
+    }
+    return 0;
+}
+
