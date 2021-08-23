@@ -42,6 +42,31 @@ Explanation 2:
  Pair (20, -10) gives a difference of 30 i.e 20 - (-10) => 20 + 10 => 30
 */
 
+//Brute force solution
+// Ordered map is used
+// Time complexity:- O(n^2)
+// Space complexity:- O(1)
+
+int Solution::solve(vector<int> &A, int B) 
+{
+   for(int i=0;i<A.size();i++)
+   {
+       int sm = A[i]+B;
+       for(int j=0;j<A.size();j++)
+       {
+           if(i!=j)
+           {
+               if(sm==A[j])
+                   return 1;
+           }
+       }
+   }
+   
+    return 0;
+}
+
+
+
 // Ordered map is used
 // Time complexity:- O(nlogn+n)
 // Space complexity:- O(n)
