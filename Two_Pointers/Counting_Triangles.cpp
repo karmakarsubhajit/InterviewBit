@@ -65,3 +65,34 @@ int Solution::nTriang(vector<int> &A)
     return ans%1000000007;
 }
 
+
+// Sorting + two nested loop (more optimal) solution
+// Time complexity:- O(n^2)
+// Space complexity:- O(1)
+
+int Solution::nTriang(vector<int> &A) 
+{
+    int ans=0;
+    int n = A.size();
+    if(n<=2)
+        return 0;
+
+    sort(A.begin(), A.end());
+    for(int i=n-1;i>=2;i--)
+    {
+        int l = 0;
+        int r = i-1;
+        while(l<r)
+        {
+            if(A[l]+A[r]>A[i])
+            {
+                ans = (ans%1000000007+(r-l)%1000000007)%1000000007;
+                r--;
+            }
+            else
+                l++;
+        }
+    }
+    return ans%1000000007;
+}
+
