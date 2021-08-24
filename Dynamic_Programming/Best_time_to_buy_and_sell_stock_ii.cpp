@@ -47,8 +47,31 @@ Explanation 2:
 
 Overall profit = 8
 */
+// DP soln
+// Time complexity:- O(n)
+// Space complexity:- O(n)
 
-// One pass soln
+
+int Solution::maxProfit(const vector<int> &A) 
+{
+    if(A.size()<2)
+        return 0;
+    int sum = 0;
+    vector<int> dp(A.size(),0);
+    
+    for(int i=1;i<A.size();i++)
+    {
+        if(A[i]>A[i-1])
+            dp[i] = dp[i-1]+A[i]-A[i-1];
+        else
+            dp[i] = dp[i-1];
+    }
+    return dp[A.size()-1];
+}
+
+
+
+// One pass optimal soln
 // Time complexity:- O(n)
 // Space complexity:- O(1)
 
