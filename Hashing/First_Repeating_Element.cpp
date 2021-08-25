@@ -68,3 +68,24 @@ int Solution::solve(vector<int> &A)
    
     return -1;
 }
+
+// One pass solution
+// Time complexity:- O(n)
+// Space complexity:- O(n)
+
+int Solution::solve(vector<int> &A) 
+{
+    int n = A.size();
+    map<int,int> mp;
+    int mn = INT_MAX;
+    for(int i=A.size()-1;i>=0;i--)
+    {
+        mp[A[i]]++;
+        if(mp[A[i]]>=2)
+        {
+            mn = min(mn,i);
+        }
+    }
+   return (mn==INT_MAX)?-1:A[mn];
+   
+}
