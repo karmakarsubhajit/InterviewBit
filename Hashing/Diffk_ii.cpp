@@ -38,7 +38,7 @@ int Solution::diffPossible(const vector<int> &A, int B)
 }
 
 
-// Using Hash Map
+// Using Hash Map | Two pass soln
 // Time complexity:- O(n)
 // Space complexity:- O(n)
 
@@ -63,5 +63,26 @@ int Solution::diffPossible(const vector<int> &A, int B)
                 return 1;
         }
     }
+    return 0;
+}
+
+
+
+// Using Hash Map | One pass soln | Optimal
+// Time complexity:- O(n)
+// Space complexity:- O(n)
+
+int Solution::diffPossible(const vector<int> &A, int B) 
+{
+    unordered_map<int,int> mp;
+    for(int i=0;i<A.size();i++)
+    {
+        int a = A[i]+B;
+        int b = A[i]-B;
+        if(mp.find(a)!=mp.end() || mp.find(b)!=mp.end())
+            return 1;
+        mp[A[i]]=1;
+    }
+    
     return 0;
 }
