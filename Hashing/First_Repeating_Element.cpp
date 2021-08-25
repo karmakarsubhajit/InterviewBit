@@ -48,6 +48,27 @@ Explanation 2:
 
 */
 
+// Brute Force solution
+// Time complexity:- O(n^2)
+// Space complexity:- O(1)
+
+int Solution::solve(vector<int> &A) 
+{
+    int n = A.size();
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            if(A[i]==A[j])
+                return A[i];
+        }
+    }
+    return -1;
+    
+}
+
+
+
 // Two pass solution
 // Time complexity:- O(n)
 // Space complexity:- O(n)
