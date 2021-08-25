@@ -59,3 +59,33 @@ int Solution::colorful(int A)
     }
     return 1;
 }
+
+// Alternate solution
+// Time complexity:- O(n^2), where n is number of digits in the number A
+// Space complexity:- O(9)=O(1)
+
+int Solution::colorful(int A) 
+{
+    if(A==0)
+        return 0;
+    map<int,int> mp;
+    int temp = A;
+    string st = to_string(temp);
+    int n = st.length();
+    for(int i=0;i<n;i++)
+    {
+        long long int mul =1;
+        for(int j=i;j<n;j++)
+        {
+            mul=mul*(st[j]-'0');
+            if(mp[mul]!=0)
+            {
+                return 0;
+            }
+            mp[mul]=1;
+        }    
+        
+    }
+
+    return 1;
+}
