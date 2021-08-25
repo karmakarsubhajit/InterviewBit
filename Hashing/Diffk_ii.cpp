@@ -16,6 +16,29 @@ Return 0 / 1 for this problem.
 */
 
 
+
+//Brute force soln
+// Time complexity:- O(n^2)
+// Space complexity:- O(1)
+
+
+
+int Solution::diffPossible(const vector<int> &A, int B) 
+{
+    for(int i=0;i<A.size();i++)
+    {
+        for(int j=i+1;j<A.size();j++)
+        {
+            if(abs(A[i]-A[j])==B)
+                return 1;
+        }
+    }
+    
+    return 0;
+}
+
+
+// Using Hash Map
 // Time complexity:- O(n)
 // Space complexity:- O(n)
 
