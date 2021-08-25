@@ -46,7 +46,7 @@ Explanation 2:
  Window size is 1, so the output array is [1, 1, 1, 1].
 */
 
-// Time complexity:- O(nlogn)
+// Time complexity:- O(n)
 // Space complexity:- O(n)
 
 vector<int> Solution::dNums(vector<int> &A, int B) 
