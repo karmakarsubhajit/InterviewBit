@@ -13,6 +13,43 @@ will result in
 */
 
 
+
+// Using brute force approach
+// Time complexity:- O(nklog(nk)), where k is no of lists, and n is no of nodes in a list
+// Space complexity:- O(nk)
+
+ListNode* Solution::mergeKLists(vector<ListNode*> &lists) 
+{
+     if(lists.size()==0)
+            return NULL;
+        vector<int> v;
+        for(auto i:lists)        
+        {
+            if(i!=NULL)
+            {
+                ListNode* temp = i;
+                while(temp!=NULL)
+                {
+                    v.push_back(temp->val);
+                    temp = temp->next;
+                }
+            }
+        }
+        sort(v.begin(), v.end());
+        ListNode* t = new ListNode(-1);
+        ListNode* p = t;
+        for(auto i:v)
+        {
+            p->next= new ListNode(i);
+            p=p->next;
+        }
+        return t->next;
+}
+
+
+
+
+
 // Using merge sorted lists approach
 // Time complexity:- O(nk^2), where k is no of lists, and n is no of nodes in a list
 // Space complexity:- O(1)
@@ -67,6 +104,12 @@ ListNode* Solution::mergeKLists(vector<ListNode*> &lists)
     }
     return head;
 }
+
+
+
+
+
+
 
 // Using min heap approach
 // Time complexity:- O(nklogk), where k is no of lists, and n is no of nodes in a list
