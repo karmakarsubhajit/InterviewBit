@@ -25,37 +25,8 @@ If n = 4 and k = 2, a solution is:
 */
 
 
-void getComb(vector<vector<int>>& ans, vector<int>& v, int i, int n, int k)
-{
-    if(v.size()==k)
-    {
-        ans.push_back(v);
-        return;
-    }
-    if(i>n)
-        return;
-    getComb(ans,v,i+1,n,k);
-    v.push_back(i);
-    getComb(ans,v,i+1,n,k);
-    v.pop_back();
-}
-
-
-vector<vector<int> > Solution::combine(int n, int k) 
-{
-    vector<vector<int>> ans;
-    vector<int> v;
-    getComb(ans,v,1,n,k);
-    
-    sort(ans.begin(), ans.end());
-    
-    return ans;
-}
-
-
-
-// Alternate approach
-
+// Time complexity:- O(2^n)
+// Space complexity:- O(k)
 
     void getComb(vector<vector<int>>& ans, vector<int>& v, int i, int k, int n )
     {
@@ -84,3 +55,35 @@ vector<vector<int> > Solution::combine(int n, int k)
     sort(ans.begin(), ans.end());
         return ans;
     }
+
+
+// More optimal approach
+// Time complexity:- O(2^n)
+// Space complexity:- O(k)
+
+void getComb(vector<vector<int>>& ans, vector<int>& v, int i, int n, int k)
+{
+    if(v.size()==k)
+    {
+        ans.push_back(v);
+        return;
+    }
+    if(i>n)
+        return;
+    getComb(ans,v,i+1,n,k);
+    v.push_back(i);
+    getComb(ans,v,i+1,n,k);
+    v.pop_back();
+}
+
+
+vector<vector<int> > Solution::combine(int n, int k) 
+{
+    vector<vector<int>> ans;
+    vector<int> v;
+    getComb(ans,v,1,n,k);
+    
+    sort(ans.begin(), ans.end());
+    
+    return ans;
+}
