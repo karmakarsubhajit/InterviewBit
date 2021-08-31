@@ -25,8 +25,8 @@ If n = 4 and k = 2, a solution is:
 */
 
 
-// Time complexity:- O(2^n)
-// Space complexity:- O(k)
+// Time complexity:- O(n^n)
+// Space complexity:- O(n)
 
     void getComb(vector<vector<int>>& ans, vector<int>& v, int i, int k, int n )
     {
@@ -59,7 +59,7 @@ vector<vector<int> > Solution::combine(int n, int k)
 
 // More optimal approach
 // Time complexity:- O(2^n)
-// Space complexity:- O(k)
+// Space complexity:- O(n)
 
 void getComb(vector<vector<int>>& ans, vector<int>& v, int i, int n, int k)
 {
