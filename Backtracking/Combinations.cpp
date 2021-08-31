@@ -25,7 +25,7 @@ If n = 4 and k = 2, a solution is:
 */
 
 
-// Time complexity:- O(n^n)
+// Time complexity:- O(k*n^n)
 // Space complexity:- O(n)
 
     void getComb(vector<vector<int>>& ans, vector<int>& v, int i, int k, int n )
