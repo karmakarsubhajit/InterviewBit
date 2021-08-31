@@ -58,7 +58,7 @@ vector<vector<int> > Solution::combine(int n, int k)
 
 
 // More optimal approach
-// Time complexity:- O(2^n)
+// Time complexity:- O(k*2^n)
 // Space complexity:- O(n)
 
 void getComb(vector<vector<int>>& ans, vector<int>& v, int i, int n, int k)
