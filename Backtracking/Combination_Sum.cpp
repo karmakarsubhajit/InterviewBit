@@ -22,7 +22,7 @@ A solution set is:
 [7]
 */
 
-// Time complexity:- O(n^n)
+// Time complexity:- O(k*n^n)
 // Space complexity:- O(n)
 
     void getComb(vector<vector<int>>& ans, vector<int>& v, vector<int> candidates, int n, int i, int sm, int target)
@@ -64,7 +64,7 @@ vector<vector<int> > Solution::combinationSum(vector<int> &A, int target)
 
 
 // Optimal soln
-// Time complexity:- O(2^n)
+// Time complexity:- O(k*2^n)
 // Space complexity:- O(n)
 
 void getComb(vector<vector<int>>& ans, vector<int>& v, vector<int> candidates, int n, int i, int sm, int target)
