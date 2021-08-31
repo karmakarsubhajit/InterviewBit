@@ -26,7 +26,7 @@ If S = [1,2,3], a solution is:
 */
 
 
-// Time complexity:- O(2^n)
+// Time complexity:- O(n*2^n)
 // Space complexity:- O(n), stack space
 
 
