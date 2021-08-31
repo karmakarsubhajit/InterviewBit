@@ -25,6 +25,33 @@ If S = [1,2,3], a solution is:
 
 */
 
+// Time complexity:- O(n*2^n)
+// Space complexity:- O(n), stack space
+
+void getSubset(int i, int n, vector<int>& A, vector<int>& a, vector<vector<int>>& ans)
+{
+    ans.push_back(a);
+    for(int p=i;p<n;p++)
+    {
+        a.push_back(A[p]);
+        getSubset(p+1,n,A,a,ans);
+        a.pop_back();
+    }    
+}
+
+vector<vector<int> > Solution::subsets(vector<int> &A) 
+{
+    sort(A.begin(),A.end());
+    int n = A.size();
+    vector<vector<int>> ans;
+    vector<int> v;
+    getSubset(0,n,A,v,ans);
+    return ans;
+}
+
+
+
+
 
 // Time complexity:- O(n*2^n)
 // Space complexity:- O(n), stack space
