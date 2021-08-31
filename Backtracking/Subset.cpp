@@ -25,6 +25,35 @@ If S = [1,2,3], a solution is:
 
 */
 
+
+// Time complexity:- O(n*2^n)
+// Space complexity:- O(1) 
+
+
+vector<vector<int> > Solution::subsets(vector<int> &A) 
+{
+    sort(A.begin(),A.end());
+    int n = A.size();
+    vector<vector<int>> ans;
+ 
+    for(int i=0;i<=(1<<n)-1;i++)
+    {
+        vector<int> v;
+        for(int j=0;j<n;j++)
+        {
+            if((i&(1<<j))!=0)
+            {
+                v.push_back(A[j]);
+            }
+        }   
+        ans.push_back(v);
+    }
+    sort(ans.begin(),ans.end());
+    return ans;
+}
+
+
+
 // Time complexity:- O(n*2^n)
 // Space complexity:- O(n), stack space
 
