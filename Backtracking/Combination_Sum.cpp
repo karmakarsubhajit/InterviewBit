@@ -22,22 +22,6 @@ A solution set is:
 [7]
 */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Time complexity:- O(n^n)
 // Space complexity:- O(n)
 
@@ -77,3 +61,48 @@ vector<vector<int> > Solution::combinationSum(vector<int> &A, int target)
     return ans;
 }
 
+
+
+// Optimal soln
+// Time complexity:- O(2^n)
+// Space complexity:- O(n)
+
+void getComb(vector<vector<int>>& ans, vector<int>& v, vector<int> candidates, int n, int i, int sm, int target)
+{
+    if(sm>target)
+        return;
+    if(sm==target)
+    {
+        ans.push_back(v);   
+        return;
+    }
+    if(i>=n)
+        return;
+
+    getComb(ans, v, candidates,n,i+1,sm,target);
+    v.push_back(candidates[i]);
+    getComb(ans, v, candidates,n,i,sm+candidates[i],target);
+    v.pop_back();
+    
+}
+
+
+vector<vector<int> > Solution::combinationSum(vector<int> &A, int target) 
+{
+    int n = A.size();    
+    sort(A.begin(), A.end());
+    vector<int> a;
+    a.push_back(A[0]);
+    for(int i=1;i<n;i++)
+    {
+        if(A[i-1]!=A[i])
+            a.push_back(A[i]);
+    }
+
+    vector<vector<int>> ans;
+    vector<int> v;
+    int sm = 0;
+    getComb(ans, v, a, a.size(), 0, sm, target);
+    sort(ans.begin(), ans.end());
+    return ans;
+}
