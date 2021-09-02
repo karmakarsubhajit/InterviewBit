@@ -5,8 +5,6 @@ You are climbing a stair case and it takes A steps to reach to the top.
 
 Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
-
-
 Input Format:
 
 The first and the only argument contains an integer A, the number of steps.
@@ -51,3 +49,26 @@ int Solution::climbStairs(int A)
        return 0;
     return climbStairs(A-1)+climbStairs(A-2);
 }
+
+
+// Memoize soln
+// Time complexity:- O(n)
+// Space complexity:- O(n)
+
+
+int compute(vector<int>& dp, int A)
+{
+   if(A<=2)
+     return A;
+    if(dp[A]!=-1)
+      return dp[A];
+    dp[A] = compute(dp,A-1)+compute(dp,A-2);
+    return dp[A];
+}
+
+int Solution::climbStairs(int A) 
+{
+    vector<int> v(A+1,-1);
+    return compute(v,A);
+}
+
