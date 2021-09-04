@@ -26,6 +26,7 @@ There exist two distinct solutions to the 4-queens puzzle:
 ]
 */
 
+// Brute Force
 // Time complexity:- O(n^n)
 // Space complexity:- O(n)
 
@@ -79,3 +80,53 @@ vector<vector<string> > Solution::solveNQueens(int A) {
     return ans;
 }
 
+
+// Optimised isValid function
+// Time complexity:- O(n^n)
+// Space complexity:- O(n)
+
+
+
+void getAns(vector<vector<string>>& ans, int i, int A, vector<string>& temp, vector<int>& cols, vector<int>& ld, vector<int>& rd)
+{
+    if(i==A)
+    {
+        ans.push_back(temp);
+        return;
+    }
+    for(int c=0;c<A;c++)
+    {
+        if((ld[A-1+i-c]!=1)&&(rd[i+c]!=1)&&(cols[c]!=1))
+        {
+            temp[i][c] = 'Q';
+            ld[A-1+i-c]=1;
+            rd[i+c]=1;
+            cols[c]=1;
+            getAns(ans, i+1,A,temp,cols,ld,rd);
+            ld[A-1+i-c]=0;
+            rd[i+c]=0;
+            cols[c]=0;
+            temp[i][c]= '.';
+        }
+    }
+}
+
+vector<vector<string> > Solution::solveNQueens(int A) {
+    string st="";
+    vector<string> temp;
+    vector<vector<string>> ans;
+    
+    for(int i=1;i<=A;i++)
+    {
+        st+=".";
+    }
+    for(int i=1;i<=A;i++)
+    {
+        temp.push_back(st);
+    }
+    vector<int> cols(100,0);
+    vector<int> ld(100,0);
+    vector<int> rd(100,0);
+    getAns(ans, 0, A, temp, cols,ld,rd);
+    return ans;
+}
