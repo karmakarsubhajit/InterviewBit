@@ -66,3 +66,28 @@ int Solution::solve(vector<int> &A)
     }
     return ans;
 }
+
+// Backtrack
+// Time complexity:- O(2^4)
+// Space complexity:- O(n), stack space
+
+void backtrack(vector<int>& A, int temp, int cnt, int i, int& ans)
+{
+  if(cnt==4)
+  {
+      ans=max(ans,temp);
+      return;
+  }    
+  if(i==A.size())
+    return; 
+  backtrack(A,temp,cnt,i+1,ans);
+  backtrack(A,temp^A[i],cnt+1,i+1,ans);
+}
+
+int Solution::solve(vector<int> &A) 
+{
+    int ans = 0;
+    int cnt=0;
+    backtrack(A,0,cnt,0,ans);
+    return ans;
+}
