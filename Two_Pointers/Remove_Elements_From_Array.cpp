@@ -53,3 +53,30 @@ int Solution::removeElement(vector<int> &A, int B) {
     }
     return l-c;
 }
+
+
+
+// Optimal soln
+// Time complexity:- O(n)
+// Space complexity:- O(1)
+
+
+int Solution::removeElement(vector<int> &A, int B) 
+{
+    int l = A.size();
+    int i = 0;
+    
+    for(int j=0;j<A.size();j++)
+    {
+        if(A[j]!=B)
+        {
+            int temp = A[j];
+            A[j] = A[i];
+            A[i] = temp;
+            i++;
+        }
+
+    }  
+    return i;
+}
+
