@@ -74,3 +74,40 @@ vector<vector<string> > Solution::partition(string A) {
     getAns(i,l,A,temp,ans);
     return ans;
 }
+
+
+
+
+// Optimised soln using DP to remove additional checking for whether each substring is palidrome or not
+// Time complexity:- (n*2^n)
+// Space complexity:- O(n*n)
+
+  void getAns(string s, int i, vector<string>& temp, vector<vector<string>>& ans, vector<vector<bool>>& dp)
+    {
+        if(i==s.length())
+        {
+            ans.push_back(temp);
+            return;
+        }
+        for(int ind=i;ind<s.length();ind++)
+        {
+            if((s[i]==s[ind])&&((ind-i)<=2 || dp[i+1][ind-1]==true))
+            {
+                dp[i][ind]=true;
+                temp.push_back(s.substr(i,ind-i+1));
+                getAns(s,ind+1,temp,ans,dp);
+                temp.pop_back();
+            }
+        }
+    }
+    
+    vector<vector<string>>  Solution::partition(string s) 
+    {
+        int n = s.length();
+        vector<vector<bool>> dp(n,vector<bool>(n,false));
+        vector<vector<string>> ans;
+        vector<string> temp;
+        int i = 0;
+        getAns(s,i,temp,ans,dp);
+        return ans;
+    }
