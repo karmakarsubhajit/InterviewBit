@@ -91,3 +91,34 @@ vector<int> Solution::solve(TreeNode* A)
     }
     return p;
 }
+
+// BFS approach || Optimal soln
+// Time complexity:- O(n)
+// Space complexity:- O(n)
+
+
+vector<int> Solution::solve(TreeNode* A) 
+{
+      vector<int> v;
+    if(A==NULL)
+        return v;
+    queue<TreeNode*> q;
+    q.push(A);
+
+    while(q.size()!=0)
+    {
+        int n =q.size();
+        for(int i=1;i<=n;i++)
+        {
+            TreeNode* p = q.front();
+            q.pop();
+            v.push_back(p->val);
+            if(p->right!=NULL)
+                q.push(p->right);
+            if(p->left!=NULL)
+                q.push(p->left);
+        }
+    }
+    reverse(v.begin(), v.end());
+    return v;
+}
