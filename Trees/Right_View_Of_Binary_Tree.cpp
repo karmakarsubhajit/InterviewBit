@@ -80,3 +80,40 @@ vector<int> Solution::solve(TreeNode* A)
     dfs(A,ans,0);
     return ans;
 }
+
+
+
+
+// BFS traversal || Level Order
+// Time complexity:- O(n)
+// Space complexity:- O(n/2) = O(n)
+
+
+vector<int> Solution::solve(TreeNode* A) 
+{
+    vector<int> ans;
+    if(A==NULL)
+        return ans;
+    queue<TreeNode*> q;
+    q.push(A);
+    while(q.size()!=0)
+    {
+        int n = q.size();
+        for(int i=1;i<=n;i++)
+        {
+            TreeNode* curr = q.front();
+            q.pop();
+            if(i==n)
+            {
+                ans.push_back(curr->val);
+            }
+    
+            if(curr->left!=NULL)
+                q.push(curr->left);
+            if(curr->right!=NULL)
+                q.push(curr->right);
+        }
+    }
+    return ans;
+}
+
