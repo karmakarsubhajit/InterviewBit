@@ -113,3 +113,47 @@ int Solution::isSymmetric(TreeNode* A)
     }
     return true;
 }
+
+// Time complexity:- O(min(m,n)) , where m,n is the no of nodes 
+// Space complexity:- O(n/2+m/2) = O(n+m)
+
+int Solution::isSameTree(TreeNode* A, TreeNode* B) 
+{
+    if(A==NULL && B!=NULL)
+        return 0;
+    else if(A!=NULL && B==NULL)
+        return 0;
+    else if(A==NULL && B==NULL)
+        return 1;
+    else
+    {
+        queue<TreeNode*> q;
+        q.push(A);
+        q.push(B);
+        while(q.size()!=0)
+        {
+            TreeNode* l = q.front();
+            q.pop();
+            TreeNode* r = q.front();
+            q.pop();
+            if(l->val!=r->val)
+                return 0;
+            if(l->left!=NULL && r->left!=NULL)
+            {
+                q.push(l->left);
+                q.push(r->left);
+            }
+            else if(l->left || r->left)
+                return 0;
+            if(l->right!=NULL && r->right!=NULL)
+            {
+                q.push(l->right);
+                q.push(r->right);
+            }
+            else if(l->right || r->right)
+                return 0;
+        }
+        return 1;
+    }
+}
+
