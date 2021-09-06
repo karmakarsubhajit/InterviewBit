@@ -40,3 +40,37 @@ int Solution::minDepth(TreeNode* A)
     dfs(A,1,mn);
     return mn;
 }
+
+
+// Iterative soln
+// Time complexity:- O(n)
+// Space complexity:- O(n/2) = O(n)
+
+
+int Solution::minDepth(TreeNode* A) 
+{
+    int mn = INT_MAX;
+    queue<TreeNode*> q;
+    int depth = 1;
+    if(A==NULL)
+        return 0;
+    q.push(A);
+    while(q.size()!=0)
+    {
+        int n = q.size();
+        for(int i=1;i<=n;i++)
+        {
+            TreeNode* curr = q.front();
+            q.pop();
+            if(curr->left==NULL && curr->right==NULL)
+                mn=min(mn,depth);
+            if(curr->left!=NULL)
+                q.push(curr->left);
+            if(curr->right!=NULL)
+                q.push(curr->right);
+        }
+        depth++;
+    }
+    return mn;
+}
+
