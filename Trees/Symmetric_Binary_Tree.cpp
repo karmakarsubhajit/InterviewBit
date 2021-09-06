@@ -74,3 +74,42 @@ int Solution::isSymmetric(TreeNode* A)
         return true;
     return getAns(A->left,A->right);
 }
+
+
+// Iterative approach
+// Time complexity:- O(n)
+// Space complexity:- O(n/2) = O(n)
+
+
+int Solution::isSymmetric(TreeNode* A) 
+{
+    if(A==NULL)
+        return true;
+    queue<TreeNode*> q;
+    q.push(A);
+    q.push(A);
+    while(q.size()!=0)
+    {
+        TreeNode* l = q.front();
+        q.pop();
+        TreeNode* r = q.front();
+        q.pop();
+        if(l->val!=r->val)
+            return false;
+        if(l->left!=NULL && r->right!=NULL)
+        {
+            q.push(l->left);
+            q.push(r->right);
+        }
+        else if(l->left || r->right)
+            return false;
+        if(l->right!=NULL && r->left!=NULL)
+        {
+            q.push(l->right);
+            q.push(r->left);
+        }
+        else if(l->right || r->left)
+            return false;
+    }
+    return true;
+}
