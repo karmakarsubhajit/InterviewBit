@@ -90,3 +90,57 @@ vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* A)
     }
     return ans;
 }
+
+
+
+
+// Two stack solution  || BFS solution
+// Time complexity:- O(n)
+// Space complexity:- O(n/2) = O(n)
+
+vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* A) 
+{
+    vector<vector<int>> ans;
+    if(A==NULL)
+        return ans;
+    stack<TreeNode*> currLevel;
+    stack<TreeNode*> nextLevel;
+    currLevel.push(A);
+    int c = 0;
+    while(1)
+    {
+        if(currLevel.size()==0)
+            break;
+        vector<int> v; 
+        while(currLevel.size()!=0)
+        {
+            TreeNode* curr = currLevel.top();
+            currLevel.pop();
+            
+            v.push_back(curr->val);
+            if(c==0)
+            {
+                if(curr->left)
+                    nextLevel.push(curr->left);
+                if(curr->right)
+                    nextLevel.push(curr->right);
+            }
+            else if(c==1)
+            {
+                if(curr->right)
+                    nextLevel.push(curr->right);
+                
+                if(curr->left)
+                    nextLevel.push(curr->left);
+            }
+        }
+            c=1-c;
+            currLevel=nextLevel;
+            stack<TreeNode*> st;
+            nextLevel = st;
+            ans.push_back(v);
+    }
+    
+    return ans;
+}
+
