@@ -54,3 +54,39 @@ vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* A)
     }
     return ans;
 }
+
+
+
+// BFS traversal || Cleaner code
+// Time complexity:- O(n)
+// Space complexity:- O(n)
+
+vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* A) 
+{
+    vector<vector<int>> ans;
+    if(A==NULL)
+        return ans;
+    queue<TreeNode*> q;
+    q.push(A);
+    int c = 0;
+    while(q.size()!=0)
+    {
+        int n = q.size();
+        vector<int> v; 
+        for(int i=0;i<n;i++)
+        {
+            TreeNode* curr = q.front();
+            q.pop();
+            v.push_back(curr->val);
+            if(curr->left!=NULL)
+                q.push(curr->left);
+            if(curr->right!=NULL)
+                q.push(curr->right);
+        }
+        if(c%2==1)
+            reverse(v.begin(),v.end());
+        c++;
+        ans.push_back(v);
+    }
+    return ans;
+}
