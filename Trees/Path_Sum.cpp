@@ -38,7 +38,7 @@ int Solution::hasPathSum(TreeNode* A, int B)
 
 // Iterative
 // Time complexity:- O(n)
-// Space complexity:- O(h)
+// Space complexity:- O(min(height of leaf node)
 
 
 int Solution::hasPathSum(TreeNode* A, int B) 
