@@ -14,6 +14,7 @@ return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 Return 0 / 1 ( 0 for false, 1 for true ) for this problem
 */
 
+// Recursive
 // Time complexity:- O(n)
 // Space complexity:- O(h)
 
@@ -33,4 +34,38 @@ bool hasPath(TreeNode* A, int B, int sm)
 int Solution::hasPathSum(TreeNode* A, int B) 
 {
     return hasPath(A,B,0);
+}
+
+// Iterative
+// Time complexity:- O(n)
+// Space complexity:- O(h)
+
+
+int Solution::hasPathSum(TreeNode* A, int B) 
+{
+    stack<pair<TreeNode*,int>> st;
+    st.push(make_pair(A,0));
+    while(st.size()!=0)
+    {
+        pair<TreeNode*,int> temp = st.top();
+        st.pop();
+        TreeNode* a = temp.first;
+        int b = temp.second;
+        b=b+a->val;
+        if((a->left==NULL) && (a->right==NULL))
+        {
+            if(b==B) 
+                return 1;
+        }
+        else
+        {
+            if(a->left)
+                st.push(make_pair(a->left,b));
+             if(a->right)
+                st.push(make_pair(a->right,b));   
+
+        }
+
+    }
+    return 0;
 }
