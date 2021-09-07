@@ -87,3 +87,35 @@ TreeNode* Solution::invertTree(TreeNode* A)
 {
     return invertedRoot(A);
 }
+
+// Iterative level order approach
+// Time complexity:- O(n)
+// Space complexity:- O(n/2) = O(n)
+
+void swapNode(TreeNode** a, TreeNode** b)
+{
+    TreeNode* temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+TreeNode* Solution::invertTree(TreeNode* A) 
+{
+    if(A==NULL)
+        return A;
+    queue<TreeNode*> q;
+    q.push(A);
+    while(q.size()!=0)
+    {
+        TreeNode* curr = q.front();
+        q.pop();
+        TreeNode* p = curr->left;
+        curr->left = curr->right;
+        curr->right = p;
+        if(curr->left)
+            q.push(curr->left);
+        if(curr->right)
+            q.push(curr->right);
+    }
+    return A;
+}
