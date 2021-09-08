@@ -124,3 +124,40 @@ vector<int> Solution::solve(TreeNode* A, int B)
     dfs(ans,A,B,ch);
     return ans;
 }
+
+
+// BFS || Level Order
+// Time complexity:- O(n)
+// Space complexity:- O(h*n/2) = O(nh)
+
+
+vector<int> Solution::solve(TreeNode* A, int B) 
+{
+    vector<int> ans;
+    bool ch=false;
+    queue<pair<TreeNode*,vector<int>>> q;
+    vector<int> v;
+    q.push(make_pair(A,v));
+    while(q.size()!=0)
+    {
+        int n = q.size();
+        for(int i=1;i<=n;i++)
+        {
+            pair<TreeNode*, vector<int>> curr = q.front();
+            q.pop();
+            curr.second.push_back(curr.first->val);
+            if(curr.first->val==B)
+                return curr.second;
+            if(curr.first->left!=NULL)
+            {
+                q.push(make_pair(curr.first->left,curr.second));
+            }
+            if(curr.first->right!=NULL)
+            {
+                q.push(make_pair(curr.first->right,curr.second));
+            }
+        } 
+    }
+    return {};
+}
+
