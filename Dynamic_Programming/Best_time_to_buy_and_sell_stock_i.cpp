@@ -38,6 +38,31 @@ Explanation 2:
  Buy the stock on day 0, and sell it on day 2.
 */
 
+
+
+// DP soln
+// Time complexity:- O(n)
+// Space complexity:- O(n)
+
+
+int Solution::maxProfit(const vector<int> &A) 
+{
+    int n = A.size();
+    if(n<=1)
+        return 0;
+    vector<int> dp(n,0);
+    int mn = A[0];
+    
+    dp[0]=0;
+    for(int i=0;i<n;i++)
+    {
+        dp[i]=max(dp[i-1],A[i]-mn);
+        mn = min(A[i],mn);
+    }
+    return dp[n-1];
+}
+
+
 // Optimal soln
 // Time complexity:- O(n)
 // Space complexity:- O(1)
