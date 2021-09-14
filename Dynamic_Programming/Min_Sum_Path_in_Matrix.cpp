@@ -36,6 +36,34 @@ Explanation 1:
 
 */
 
+
+
+
+// Brute Forec recursive soln
+// Time complexity:- O(2^(m*n))
+// Space complexity:- O(min(m,n)) , stack space
+
+
+int minPath(int m, int n, int i, int j, vector<vector<int>>& A)
+{
+    if(i==m || j==n)
+        return INT_MAX;
+    if(i==m-1 && j==n-1)
+      return A[m-1][n-1];
+    return A[i][j]+min(minPath(m,n,i+1,j,A),minPath(m,n,i,j+1,A));
+
+}
+
+
+int Solution::minPathSum(vector<vector<int> > &A) 
+{
+    int m = A.size();
+    int n = A[0].size();
+    
+    return minPath(m,n,0,0,A);
+    
+}
+
 // DP solution
 // Time complexity:- O(m*n)
 // Space complexity:- O(m*n)
