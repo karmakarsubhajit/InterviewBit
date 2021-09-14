@@ -39,7 +39,7 @@ Explanation 1:
 
 
 
-// Brute Forec recursive soln
+// Brute Force recursive soln
 // Time complexity:- O(2^(m*n))
 // Space complexity:- O(min(m,n)) , stack space
 
@@ -63,6 +63,39 @@ int Solution::minPathSum(vector<vector<int> > &A)
     return minPath(m,n,0,0,A);
     
 }
+
+// Memoize DP soln
+// Time complexity:- O(m*n)
+// Space complexity:- O(m*n)
+
+int minPath(int m, int n, int i, int j, vector<vector<int>>& A, vector<vector<int>>& dp)
+{
+    if(i==m || j==n)
+        return INT_MAX;
+    if(i==m-1 && j==n-1)
+    {
+        dp[m-1][n-1]=A[m-1][n-1];
+        return A[m-1][n-1];
+    }
+    if(dp[i][j]!=-1)
+        return dp[i][j];
+
+    dp[i][j] =  A[i][j]+min(minPath(m,n,i+1,j,A, dp),minPath(m,n,i,j+1,A, dp));
+    
+    return dp[i][j];
+
+}
+
+
+int Solution::minPathSum(vector<vector<int> > &A) 
+{
+    int m = A.size();
+    int n = A[0].size();
+    vector<vector<int>> dp(m,vector<int>(n,-1));
+    return minPath(m,n,0,0,A,dp);
+    
+}
+
 
 // DP solution
 // Time complexity:- O(m*n)
