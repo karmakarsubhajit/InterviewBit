@@ -66,3 +66,38 @@ int Solution::minPathSum(vector<vector<int> > &A)
     }
     return dp[0][0];
 }
+
+
+
+
+// Space optimised solution || Modifying the grid itself || No extra matrix
+// Time complexity:- O(m*n)
+// Space complexity:- O(1)
+
+int Solution::minPathSum(vector<vector<int> > &A) 
+{
+    int m = A.size();
+    int n = A[0].size();
+    vector<vector<int>> dp(m, vector<int>(n,0));
+    
+    
+    for(int i=m-2;i>=0;i--)
+    {
+        A[i][n-1] = A[i][n-1]+A[i+1][n-1];
+    }
+    
+    for(int j=n-2;j>=0;j--)
+    {
+        A[m-1][j] = A[m-1][j] + A[m-1][j+1];  
+    }
+    for(int i=m-2;i>=0;i--)
+    {
+        for(int j=n-2;j>=0;j--)
+        {
+            int mn = min(A[i+1][j],A[i][j+1]);
+            A[i][j]=A[i][j]+mn;
+        }
+    }
+    return A[0][0];
+}
+
