@@ -22,6 +22,53 @@ For example, if the array is [1 2 3 4], the median is (2 + 3) / 2.0 = 2.5
 
 
 
+// Brute Force solution | Merge Array soln
+// Time complexity:- O(m+n)
+// Space complexity:- O(m+n)
+
+
+double Solution::findMedianSortedArrays(const vector<int> &A, const vector<int> &B) {
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+    int m = A.size();
+    int n = B.size();
+    int i = 0;
+    int j = 0;
+    vector<int> mergeArr;
+    while(i<m && j<n)
+    {
+        if(A[i]<B[j])
+        {
+            mergeArr.push_back(A[i]);
+            i++;
+        }
+        else
+        {
+            mergeArr.push_back(B[j]);
+            j++;
+        }
+    }
+    while(i<m)
+    {
+        mergeArr.push_back(A[i]);
+        i++;
+    }
+    while(j<n)
+    {
+        mergeArr.push_back(B[j]);
+        j++;
+    }
+    if((m+n)%2==0)
+        return (double)((double)mergeArr[(m+n)/2]+(double)mergeArr[(m+n)/2-1])/2;
+    else
+        return mergeArr[(m+n)/2];
+    return 0;
+}
+
+
+
 // Optimal solution | Binary Search
 // Time complexity:- O(log(m+n))
 // Space complexity:- O(1)
