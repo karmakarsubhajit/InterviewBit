@@ -51,3 +51,43 @@ int Solution::sumNumbers(TreeNode* A)
     getSum(A,0,ans);
     return ans;
 }
+
+
+
+// BFS approach
+// Time complexity:- O(n)
+// Space complexity:- O(n/2)
+
+int Solution::sumNumbers(TreeNode* A) 
+{
+    if(A==NULL)
+        return 0;
+    if((A->left==NULL)&&(A->right==NULL))
+    {
+        return A->val%1003;
+    }
+    int ans = 0;
+    queue<pair<TreeNode*,int>> q;
+    q.push(make_pair(A , 0));
+    while(q.empty()!=1)
+    {
+        int n = q.size();
+        for(int i=0;i<n;i++)
+        {
+            pair<TreeNode*, int> curr = q.front();
+            q.pop();
+            int curr_val =  ((((curr.second)%1003)*10)%1003 + (curr.first->val)%1003)%1003;
+            if((curr.first->left==NULL)&&(curr.first->right==NULL))
+            {
+                ans =(ans%1003+curr_val%1003)%1003;
+                continue;
+            }
+            if(curr.first->left!=NULL)
+                q.push(make_pair(curr.first->left,curr_val));
+            if(curr.first->right!=NULL)
+                q.push(make_pair(curr.first->right,curr_val));
+        }
+    }
+    
+    return ans;
+}
