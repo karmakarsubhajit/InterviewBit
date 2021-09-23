@@ -17,6 +17,35 @@ As 2 is the second smallest element in the tree.
 NOTE : You may assume 1 <= k <= Total number of nodes in BST
 */
 
+
+// Using DFS || Optimal soln
+// Time complexity:- O(n)
+// Space complexity:- O(h), h is height of tree
+
+TreeNode* findKSmallest(TreeNode* A, int& k)
+{
+    if(A==NULL)
+        return NULL;
+    TreeNode* lft = findKSmallest(A->left,k);
+    if(lft!=NULL)
+        return lft;
+    k--;
+    if(k==0)
+        return A;
+    TreeNode* right = findKSmallest(A->right,k);
+    return right;
+}
+
+
+int Solution::kthsmallest(TreeNode* A, int B) 
+{
+    TreeNode* srch = findKSmallest(A,B);
+    if(srch!=NULL)
+        return srch->val;
+    return -1;
+}
+
+
 // Using priority queue
 // Time complexity:- O(n+klogk)
 // Space complexity:- O(max(h,k)), h is height of tree
