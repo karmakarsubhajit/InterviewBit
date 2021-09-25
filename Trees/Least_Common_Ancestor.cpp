@@ -84,3 +84,57 @@ int Solution::lca(TreeNode* A, int B, int C)
         return -1;
     return lc->val;
 }
+
+
+// DFS solution || 2 pass || Extra space for storing path to two nodes
+// Time complexity:- O(n)
+// Space complexity:- O(h)
+
+
+bool getPath(TreeNode* root, int B,vector<int>& path)
+{
+    if(root==NULL)
+        return false;
+    path.push_back(root->val);
+    if(root->val==B)
+    {
+        return true;
+    }
+    if(getPath(root->left, B,  path) || getPath(root->right, B,  path))
+    {
+        return true;
+    }
+    path.pop_back();
+    return false;
+}
+
+
+
+
+int Solution::lca(TreeNode* A, int B, int C) 
+{
+    vector<int> pathB;
+    vector<int> pathC;
+   bool pB= getPath(A,B,pathB);
+   bool pC = getPath(A,C,pathC);
+   if((pB==false)||(pC==false))
+      return -1;
+    int i=0;
+    int j=0;
+    int val = -1;
+    while(i<pathB.size() && j<pathC.size())
+    {
+        if(pathB[i]==pathC[j])
+        {
+                val = pathB[i];
+        }
+        else
+            break;
+
+        i++;
+        j++;
+    }
+
+    return val;
+}
+
