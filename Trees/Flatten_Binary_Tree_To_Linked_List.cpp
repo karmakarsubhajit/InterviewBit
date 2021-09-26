@@ -49,3 +49,31 @@ TreeNode* Solution::flatten(TreeNode* A)
     flattenBT_to_LL(A,&prev);
     return A;
 }
+
+
+
+// Iterative solution using stack
+// Time complexity:- O(n) 
+// Space complexity:- O(h)
+
+TreeNode* Solution::flatten(TreeNode* A) 
+{
+    stack<TreeNode*> st;
+    st.push(A);
+    
+    while(st.empty()!=1)
+    {
+        TreeNode* curr = st.top();
+        st.pop();
+        if(curr->right)
+            st.push(curr->right);
+        if(curr->left)
+            st.push(curr->left);
+        if(st.empty()!=1)
+            curr->right=st.top();
+        curr->left=NULL;
+    }
+    
+    return A;
+}
+
