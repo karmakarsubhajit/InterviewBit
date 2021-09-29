@@ -77,3 +77,31 @@ TreeNode* Solution::flatten(TreeNode* A)
     return A;
 }
 
+
+// Iterative solution without using stack
+// Time complexity:- O(n) 
+// Space complexity:- O(1)
+
+TreeNode* Solution::flatten(TreeNode* A) 
+{
+    TreeNode* curr = A;
+    while(curr!=NULL)
+    {
+        if(curr->left!=NULL)
+        {
+            TreeNode* temp = curr->left;
+            while(temp->right!=NULL)
+            {
+                temp=temp->right;
+            }
+            temp->right=curr->right;
+            curr->right = curr->left;
+            curr->left=NULL;
+        }
+        curr=curr->right;
+    }
+    return A;
+    
+}
+
+
