@@ -14,6 +14,32 @@ Given [1,2,0] return 3,
 
 
 
+// Brute Force soln 
+// Time Complexity:- O(n^2)
+// Space Complexity:- O(1)
+
+
+
+int Solution::firstMissingPositive(vector<int> &A) 
+{
+    
+    for(int i=1;i<=A.size();i++)
+    {
+        bool isPresent = false;
+        for(int j=0;j<A.size();j++)
+        {
+            if(A[j]==i)
+            {
+                isPresent=true;
+                break;
+            }
+        }    
+        if(isPresent==false)
+            return i;
+    }
+
+    return A.size()+1;
+}
 
 // Sorting based soln || 1 pass solution
 // Time Complexity:- O(nlogn)
