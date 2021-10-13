@@ -36,6 +36,31 @@ int Solution::minimumTotal(vector<vector<int> > &A) {
     return minimumSum(A,0,0);
 }
 
+// Memoization soln 
+// Time Complexity:- O(n*n), m,n are no of rows and cols in triangle
+// Space Complexity:- O(n*n)
+
+int minimumSum(vector<vector<int>> &A,int i, int j,vector<vector<int>> dp)
+{
+    if(i>=(A.size()-1))
+        return A[i][j];
+    if(dp[i][j]!=INT_MIN)
+        return dp[i][j];
+    int ans = A[i][j]+min(minimumSum(A,i+1,j,dp),minimumSum(A,i+1,j+1,dp));
+    dp[i][j]=ans;
+    return ans;
+
+}
+
+
+int Solution::minimumTotal(vector<vector<int> > &A) {
+    vector<vector<int>> dp(A.size(),vector<int>(A.size(),INT_MIN));
+    return minimumSum(A,0,0,dp);
+}
+
+
+
+
 // Bottom Up || Optimal soln || Modifying matrix
 // Time Complexity:- O(m*n), m,n are no of rows and cols in triangle
 // Space Complexity:- O(1)
