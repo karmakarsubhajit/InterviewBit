@@ -17,12 +17,28 @@ The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
 
 
 
+// Recursive || Brute Force
+// Time Complexity:- O(2^(m*n)), m,n are no of rows and cols in triangle
+// Space Complexity:- O(m)
+
+int minimumSum(vector<vector<int>> &A,int i, int j)
+{
+    if(i==(A.size()-1))
+        return A[i][j];
+    int ans = A[i][j]+min(minimumSum(A,i+1,j),minimumSum(A,i+1,j+1));
+    return ans;
+
+}
+
+
+int Solution::minimumTotal(vector<vector<int> > &A) {
+ 
+    return minimumSum(A,0,0);
+}
 
 // Bottom Up || Optimal soln || Modifying matrix
 // Time Complexity:- O(m*n), m,n are no of rows and cols in triangle
 // Space Complexity:- O(1)
-
-
 
 int Solution::minimumTotal(vector<vector<int> > &A) {
   
