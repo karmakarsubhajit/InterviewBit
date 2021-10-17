@@ -78,3 +78,36 @@ vector<int> Solution::inorderTraversal(TreeNode* A)
 }
 
 
+
+//Morris Inorder Traversal soln || Constant Space
+//Time complexity:- O(n)
+//Space complexity:- O(1)
+
+ 
+vector<int> Solution::inorderTraversal(TreeNode* A) 
+{
+    vector<int> ans;
+    TreeNode* curr= A;
+    while(curr!=NULL)
+    {
+        if(curr->left==NULL)
+        {
+            ans.push_back(curr->val);
+            curr=curr->right;
+        }
+        else
+        {
+            TreeNode* temp = curr->left;
+            TreeNode* prev = curr->left;
+            while(prev->right!=NULL)
+            {
+                prev=prev->right;
+            }
+            prev->right = curr;
+            curr->left=NULL;
+            curr = temp;
+        }
+    }
+ 
+    return ans;
+}
