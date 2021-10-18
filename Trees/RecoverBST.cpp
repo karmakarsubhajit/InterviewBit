@@ -124,3 +124,62 @@ vector<int> Solution::recoverTree(TreeNode* A)
     }
     return ans;
 }
+
+
+
+// Iterative || Constant space || One pass || Optimal
+// Time Complexity:- O(n)
+// Space Complexity:- O(1)
+
+
+
+vector<int> Solution::recoverTree(TreeNode* A) 
+{
+    vector<int> ans;
+    TreeNode* prev =NULL;
+    TreeNode* last =NULL;
+    TreeNode* middle =NULL;
+    TreeNode* first =NULL;
+    TreeNode* curr = A;
+    while(curr!=NULL)
+    {
+        if(curr->left==NULL)
+        {
+            if((prev!=NULL) && (prev->val>curr->val))
+            {
+                if(first==NULL)
+                {
+                    first = prev;
+                    middle = curr;
+                }
+                else
+                    last = curr;
+            }
+            prev = curr;
+            curr = curr->right;
+        }
+        else
+        {
+            TreeNode* pred = curr->left;
+            TreeNode* temp = curr->left;
+            while(pred->right!=NULL)
+                pred = pred->right;
+            pred->right = curr;
+            curr->left = NULL;
+            curr = temp;
+        }
+
+    }
+    
+    if(last==NULL)
+    {
+        ans.push_back(middle->val);
+        ans.push_back(first->val);
+    }
+    else
+    {
+        ans.push_back(last->val);
+        ans.push_back(first->val);
+    }
+    return ans;
+}
