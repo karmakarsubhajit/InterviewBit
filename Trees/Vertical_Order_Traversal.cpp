@@ -110,3 +110,43 @@ vector<vector<int>> Solution::verticalOrderTraversal(TreeNode* A)
     }
     return ans;
 }
+
+
+
+// BFS soln || Level Order
+// Time Complexity:- O(n)
+// Space Complexity:- O(n)
+
+
+vector<vector<int>> Solution::verticalOrderTraversal(TreeNode* A) 
+{
+     vector<vector<int>> ans;
+    if(A==NULL)
+        return ans;
+    unordered_map<int,vector<int>> mp;
+    queue<pair<TreeNode*,int>> q;
+    q.push(make_pair(A,0));
+    int mn=0;
+    int mx=0;
+    while(q.size()!=0)
+    {
+        pair<TreeNode*,int> curr = q.front();
+        q.pop();
+        TreeNode* n = curr.first;
+        int d = curr.second;
+        mn = min(mn,d);
+        mx =max(mx,d);
+        mp[d].push_back(n->val);
+        if(n->left!=NULL)
+            q.push(make_pair(n->left,d-1));
+        if(n->right!=NULL)
+            q.push(make_pair(n->right,d+1));    
+    }
+
+   
+    for(int i=mn;i<=mx;i++)
+    {
+        ans.push_back(mp[i]);
+    }
+    return ans;
+}
