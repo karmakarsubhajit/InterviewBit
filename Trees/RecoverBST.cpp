@@ -26,7 +26,7 @@ Explanation : Swapping 1 and 2 will change the BST to be
 which is a valid BST          
 */
 
-// Extra space by vector and recursion stack
+// Extra space by vector and recursion stack || Two pass
 // Time Complexity:- O(n)
 // Space Complexity:- O(n)
 
@@ -73,6 +73,54 @@ vector<int> Solution::recoverTree(TreeNode* A)
         ans.push_back(c);
         ans.push_back(a);
         
+    }
+    return ans;
+}
+
+
+// Recursive solution || One pass
+// Time Complexity:- O(n)
+// Space Complexity:- O(n)
+
+
+void inorder(TreeNode* root, TreeNode** prev, TreeNode** first, TreeNode** middle, TreeNode** last)
+{
+    if(root==NULL)
+        return;
+    inorder(root->left,prev,first,middle,last);
+    if((*prev!=NULL)&&((*prev)->val>root->val))
+    {
+        if(*first==NULL)
+        {
+            *first=*prev;
+            *middle=root;
+        }
+        else
+            *last = root;
+    }
+    *prev = root;
+    inorder(root->right,prev,first,middle,last);
+}
+
+
+vector<int> Solution::recoverTree(TreeNode* A) 
+{
+    vector<int> ans;
+    TreeNode* prev =NULL;
+    TreeNode* last =NULL;
+    TreeNode* middle =NULL;
+    TreeNode* first =NULL;
+    
+    inorder(A,&prev,&first,&middle,&last);
+    if(last==NULL)
+    {
+        ans.push_back(middle->val);
+        ans.push_back(first->val);
+    }
+    else
+    {
+        ans.push_back(last->val);
+        ans.push_back(first->val);
     }
     return ans;
 }
