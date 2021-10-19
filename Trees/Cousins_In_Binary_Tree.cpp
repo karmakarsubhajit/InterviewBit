@@ -85,7 +85,50 @@ Explanation 2:
 */
 
 
-// BFS || Level Order || One pass
+// DFS || Two pass
+// Time Complexity:- O(n)
+// Space Complexity:- O(n)
+
+
+int findLevel(TreeNode* root, int B,int lev)
+{
+    if(root==NULL)
+        return 0;
+    if(root->val==B)
+        return lev;
+    int ans = findLevel(root->left, B, lev+1);
+    if(ans!=0)
+        return ans;
+    return findLevel(root->right, B, lev+1);
+}
+
+void getCousins(TreeNode* A, int B, vector<int>& ans , int lev)
+{
+    if(A==NULL || lev<=1)
+        return;
+    if(lev==2)
+    {
+        if((A->left!=NULL && A->left->val==B)||(A->right!=NULL && A->right->val==B))
+            return;
+        if(A->left!=NULL)
+            ans.push_back(A->left->val);
+        if(A->right!=NULL)
+            ans.push_back(A->right->val);
+    }
+    getCousins(A->left,B,ans,lev-1);
+    getCousins(A->right,B,ans,lev-1);
+}
+
+vector<int> Solution::solve(TreeNode* A, int B) 
+{
+   int lev = findLevel(A,B,1);
+   vector<int> ans;
+   getCousins(A,B,ans,lev);
+   return ans;
+}
+
+
+// BFS || Level Order || One pass || Optimal
 // Time Complexity:- O(n)
 // Space Complexity:- O(n)
 
