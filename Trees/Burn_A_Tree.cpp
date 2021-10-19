@@ -1,4 +1,6 @@
 // https://www.interviewbit.com/problems/burn-a-tree/
+// https://www.geeksforgeeks.org/minimum-time-to-burn-a-tree-starting-from-a-leaf-node/
+
 /*
 Problem Description
 
@@ -100,5 +102,76 @@ int Solution::solve(TreeNode* A, int B)
     dfs(A,mp);
     int ans=0;
     dfsGetTime(mp,-1,B,0,ans);
+    return ans;
+}
+
+// DFS approach || One pass 
+// Time Complexity:- O(n)
+// Space Complexity:- O(n)
+
+struct subTree
+{
+    int ld=0;
+    int rd=0;
+    bool contains=false;
+    int time = -1;
+};
+
+void burnTree(TreeNode* root, int B, subTree &r, int &ans)
+{
+    if(root==NULL)
+        return;
+    if(root->left==NULL && root->right==NULL)
+    {
+        if(root->val==B)
+        {
+            r.contains=true;
+            r.time=0;
+        }
+        return;
+    }
+    subTree left_subTree;
+    burnTree(root->left,B,left_subTree,ans);
+    subTree right_subTree;
+    burnTree(root->right,B,right_subTree,ans);
+    if(root->left!=NULL)
+    {
+        r.ld = 1+max(left_subTree.ld,left_subTree.rd);
+    }
+    if(root->right!=NULL)
+    {
+        r.rd = 1+max(right_subTree.rd , right_subTree.ld);
+    }
+    if((root->right!=NULL && right_subTree.contains==true)||(root->left!=NULL && left_subTree.contains==true))
+        r.contains=true;
+    if(root->left!=NULL && left_subTree.contains==true)
+    {
+        r.time=1+left_subTree.time;
+    }
+    else if(root->right!=NULL && right_subTree.contains==true)
+    {
+        r.time=1+right_subTree.time;
+    }
+    if(r.contains)
+    {
+        if(root->left!=NULL && left_subTree.contains==true)
+        {
+            ans=max(ans,r.time+r.rd);
+        }
+        else if(root->right!=NULL && right_subTree.contains==true)
+        {
+            ans=max(ans,r.time+r.ld);
+        }
+    }
+}
+
+int Solution::solve(TreeNode* A, int B) 
+{
+    if(A==NULL)
+        return 0;
+    
+    subTree r;
+    int ans=0;
+    burnTree(A,B,r,ans);
     return ans;
 }
