@@ -63,9 +63,8 @@ Explanation 2:
 //Space complexity:- O(n)
 
 
-class Solution {
-public:
-    vector<int> inorderTraversal(TreeNode* root) 
+ 
+  vector<int> Solution::inorderTraversal(TreeNode* root) 
     {
         vector<int> ans;
         TreeNode* curr = root;
@@ -94,7 +93,6 @@ public:
         }
         return ans;
     }
-};
 
 //Recursive soln
 //Time complexity:- O(n)
