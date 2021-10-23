@@ -56,6 +56,46 @@ Explanation 2:
  The Inorder Traversal of the given tree is [6, 1, 3, 2].
 */
 
+
+
+//Iterative soln || Stack 
+//Time complexity:- O(n)
+//Space complexity:- O(n)
+
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) 
+    {
+        vector<int> ans;
+        TreeNode* curr = root;
+        if(root==NULL)
+            return ans;
+        stack<TreeNode*> st;
+        st.push(curr);
+        curr=curr->left;
+        while(1)
+        {
+            if(curr==NULL)
+            {
+                if(st.size()==0)
+                    break;
+                TreeNode* tp = st.top();
+                st.pop();
+                ans.push_back(tp->val);
+                curr = tp->right;
+            
+            }
+            else
+            {
+                st.push(curr);
+                curr=curr->left;
+            }
+        }
+        return ans;
+    }
+};
+
 //Recursive soln
 //Time complexity:- O(n)
 //Space complexity:- O(n)
