@@ -15,6 +15,37 @@ return [1,2,3].
 
 */
 
+
+
+//Iterative soln
+//Time complexity:- O(n)
+//Space complexity:- O(n)
+
+
+
+vector<int> Solution::preorderTraversal(TreeNode* root) 
+{
+    stack<TreeNode*> st;
+        vector<int> ans;
+        if(root==NULL)
+           return ans;
+        st.push(root);
+        while(1)
+        {
+            if(st.size()==0)
+                break;
+            TreeNode* curr = st.top();
+            st.pop();
+            ans.push_back(curr->val);
+            if(curr->right!=NULL)
+                st.push(curr->right);
+            if(curr->left!=NULL)
+                st.push(curr->left);
+        }
+        return ans;
+
+}
+
 //Recursive soln
 //Time complexity:- O(n)
 //Space complexity:- O(n)
