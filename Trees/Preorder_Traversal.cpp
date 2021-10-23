@@ -21,8 +21,6 @@ return [1,2,3].
 //Time complexity:- O(n)
 //Space complexity:- O(n)
 
-
-
 vector<int> Solution::preorderTraversal(TreeNode* root) 
 {
     stack<TreeNode*> st;
