@@ -94,3 +94,45 @@ public:
         return ans;
     }
 };
+
+
+// Optimal soln
+// Time Complexity :- O(n) , n is no of intervals
+// Space Complexity :- O(n)
+
+
+vector<Interval> Solution::insert(vector<Interval> &intervals, Interval newInterval) 
+{
+   int n = intervals.size();
+        vector<Interval> ans ;
+        if(n==0)
+        {
+             ans.push_back(newInterval);
+             return ans;
+        }
+        int i = 0;
+        int a = newInterval.start;
+        int b = newInterval.end;
+        while((i<n) && (intervals[i].end<newInterval.start))
+        {
+            ans.push_back(intervals[i]);
+            i++;
+        }
+        while((i<n) && (intervals[i].start<=newInterval.end))
+        {
+            a=min(intervals[i].start,a);
+            b=max(intervals[i].end,b);
+            i++;
+        }
+        Interval temp;
+        temp.start =a;
+        temp.end = b;
+        ans.push_back(temp);
+        while(i<n)
+        {
+            ans.push_back(intervals[i]);
+            i++;
+        }
+        return ans;
+}
+
