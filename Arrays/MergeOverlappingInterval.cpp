@@ -61,3 +61,34 @@ vector<Interval> Solution::merge(vector<Interval> &A)
     return ans;
 
 }
+
+
+
+// Optimal Solution
+// Time complexity:- O(nlogn)
+// Space complexity:- O(n)
+
+
+bool compare(Interval& a, Interval& b)
+{
+    return a.start<b.start;
+}
+
+vector<Interval> Solution::merge(vector<Interval> &A) 
+{
+    sort(A.begin(), A.end(),compare);
+    vector<Interval> ans;
+    
+    for(auto it:A)
+    {
+        if(ans.size()==0 || ans.back().end<it.start)
+        {
+            ans.push_back(it);
+        }   
+        else
+        {
+            ans.back().end = max(ans.back().end, it.end);
+        }
+    }
+    return ans;
+}
