@@ -17,6 +17,7 @@ First argument is an integer array A.
 */
 
 
+//  sorting
 // Time Complexity:- O(nlogn)
 // Space Complexity:- O(1)
 
@@ -32,3 +33,27 @@ vector<int> Solution::wave(vector<int> &A)
     return A;
 }
 
+
+
+// Time Complexity:- O(n)
+// Space Complexity:- O(1)
+
+vector<int> Solution::wave(vector<int> &A) 
+{
+    for(int i=0;i<A.size();i+=2)
+    {
+        if(i!=0 && A[i]<A[i-1])
+        {
+            int t = A[i];
+            A[i] = A[i-1];
+            A[i-1]=t;
+        }
+        if((i!=A.size()-1) && A[i]<A[i+1])
+        {
+            int t = A[i];
+            A[i] = A[i+1];
+            A[i+1]=t;
+        }
+    }
+    return A;
+}
