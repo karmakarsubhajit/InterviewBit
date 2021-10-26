@@ -41,6 +41,47 @@ Output 2:
 
 */
 
+
+
+
+
+// Brute Force
+// Time complexity:- O(m*n*(m+n))
+// Space complexity:- O(m*n)
+
+void setZeroHelp(int i, int j, int m, int n, vector<vector<int>>& matrix)
+{
+    for(int a=0;a<m;a++)
+    {
+        matrix[a][j] = 0; 
+    }
+    for(int b=0;b<n;b++)
+    {
+        matrix[i][b] = 0; 
+    }
+    
+
+}
+void Solution::setZeroes(vector<vector<int> > &matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+        
+        vector<vector<int>> temp = matrix;
+        
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(temp[i][j]==0)
+                {
+                   setZeroHelp(i,j,m,n,matrix);
+                }
+            }
+        }
+}
+
+
+
 // Extra linear space
 // Time complexity:- O(m*n)
 // Space complexity:- O(m+n)
