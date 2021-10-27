@@ -110,3 +110,32 @@ int Solution::perfectPeak(vector<int> &A)
 }
 
 
+// Optimal Soln || 2 pass
+// Time Complexity:- O(n)
+// Space Complexity:- O(n)
+
+
+int Solution::perfectPeak(vector<int> &A) 
+{
+    int n = A.size();
+    vector<int> preMax(n,0);
+    vector<int> suffMin(n,0);
+    preMax[0] = A[0];
+    suffMin[n-1]=A[n-1];
+
+    for(int i=1;i<n;i++)
+    {
+        preMax[i]=max(preMax[i-1],A[i]);
+        suffMin[n-1-i]=min(A[n-1-i],suffMin[n-1-i+1]);
+    }
+  
+
+    for(int i=1;i<n-1;i++)
+    {
+        if((preMax[i-1]<A[i]) && (A[i]<suffMin[i+1]))
+            return 1;
+    }
+    return 0;
+}
+
+
