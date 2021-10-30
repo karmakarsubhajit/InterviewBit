@@ -50,3 +50,36 @@ int Solution::repeatedNumber(vector<int> A)
     return -1;
 }
 
+// Without modifying the array
+// Time complexity:- O(n)
+// Space complexity:- O(1)
+
+
+
+vector<int> Solution::repeatedNumber(const vector<int> &A) 
+{   
+    long long int sm = 0;
+    long long int sm_sq = 0;
+
+    long long int p =1;
+
+    for(int i=0;i<A.size();i++)
+    {
+        p=A[i];
+        sm+=p;
+        sm-=(i+1);
+        sm_sq +=p*p;
+        sm_sq-=((long long int)(i+1)*(long long int)(i+1));
+    }
+
+    sm_sq=sm_sq/sm;
+
+    
+    int a = (int)(sm+sm_sq)/2; 
+    int b = sm_sq-a;
+        
+    vector<int> ans;
+    ans.push_back((int)a);
+    ans.push_back((int)b);
+    return ans;
+}
