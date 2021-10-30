@@ -43,3 +43,27 @@ int Solution::repeatedNumber(vector<int> A)
     }
     return -1;
 }
+
+
+
+
+// Hashing soln
+// Time complexity:- O(n)
+// Space complexity:- O(n)
+
+
+int Solution::repeatedNumber( vector<int> A)
+ {
+    unordered_map<int,int> mp;
+
+    for(int i=0;i<A.size();i++)
+    {
+        mp[A[i]]++;
+        
+        if(mp[A[i]]>(A.size()/3))
+        {
+            return A[i];
+        }
+    }
+    return -1;
+}
