@@ -17,7 +17,7 @@ If there are multiple possible answers ( like in the sample case above ), output
 If there is no duplicate, output -1
 */
 
-
+// Hashing soln
 // Time complexity:- O(n)
 // Space complexity:- O(n)
 
@@ -32,3 +32,21 @@ int Solution::repeatedNumber(const vector<int> &A)
     }
     return -1;
 }
+
+// Modifying the array
+// Time complexity:- O(n)
+// Space complexity:- O(1)
+
+
+int Solution::repeatedNumber(vector<int> A) 
+{
+    for(int i=0;i<A.size();i++)
+    {
+        int idx = abs(A[i])-1;
+        if(A[idx]<0)
+            return idx+1;
+        A[idx] = -1*A[idx];
+    }
+    return -1;
+}
+
