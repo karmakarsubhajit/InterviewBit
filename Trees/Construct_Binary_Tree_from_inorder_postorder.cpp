@@ -54,6 +54,7 @@ TreeNode* Solution::buildTree(vector<int> &inorder, vector<int> &postorder)
 }
 
 
+// Optimal solution using map
 // Time complexity:- O(n)
 // Space complexity:- O(n)
 
