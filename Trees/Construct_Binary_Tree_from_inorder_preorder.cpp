@@ -52,3 +52,35 @@ TreeNode* Solution::buildTree(vector<int> &preorder, vector<int> &inorder)
     int ind = 0;
     return buildBinaryTree(preorder,inorder,ind,0,preorder.size()-1);
 }
+
+
+
+
+// Optimal solution using map
+// Time complexity:- O(n)
+// Space complexity:- O(n)
+
+
+TreeNode* buildBinaryTree(vector<int> &preorder, unordered_map<int,int> &mp, int &ind, int l, int h)
+{
+    if(l>h)
+        return NULL;
+    TreeNode* root = new TreeNode(preorder[ind]);
+    ind++;
+    if(l==h)
+        return root;
+    int index = mp[root->val];
+    root->left = buildBinaryTree(preorder,mp, ind, l,index-1);
+    root->right = buildBinaryTree(preorder,mp,ind,index+1,h);
+    return root;
+}
+
+
+TreeNode* Solution::buildTree(vector<int> &preorder, vector<int> &inorder) 
+{
+    int ind = 0;
+    unordered_map<int,int> mp;
+    for(int i=0;i<preorder.size();i++)
+        mp[inorder[i]]=i;
+    return buildBinaryTree(preorder,mp,ind,0,preorder.size()-1);
+}
