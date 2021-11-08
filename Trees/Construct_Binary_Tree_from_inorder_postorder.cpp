@@ -52,3 +52,32 @@ TreeNode* Solution::buildTree(vector<int> &inorder, vector<int> &postorder)
     int i = inorder.size()-1;
     return buildBinaryTree(postorder,inorder,i,0,inorder.size()-1);
 }
+
+
+// Time complexity:- O(n)
+// Space complexity:- O(n)
+
+TreeNode* buildBinaryTree(vector<int>& postorder, unordered_map<int,int> &mp,int &i,  int l, int h)
+{
+    if(l>h)
+        return NULL;
+
+    TreeNode* root = new TreeNode(postorder[i]);
+    i--;
+    if(l==h)
+        return root;
+    int ind = mp[root->val];
+    root->right = buildBinaryTree(postorder,mp,i,ind+1,h); 
+    root->left = buildBinaryTree(postorder,mp,i,l,ind-1);
+    return root;
+}
+
+
+TreeNode* Solution::buildTree(vector<int> &inorder, vector<int> &postorder) 
+{
+    int i = inorder.size()-1;
+    unordered_map<int,int> mp;
+    for(int i=0;i<inorder.size();i++)
+        mp[inorder[i]]=i;
+    return buildBinaryTree(postorder,mp,i,0,inorder.size()-1);
+}
