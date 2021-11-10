@@ -122,3 +122,42 @@ TreeNode* Solution::constructBST(vector<int> &preorder)
         return root;
 }
 
+
+
+// Obtain inorder by sorting and then it is standard construct BST from inorder and preorder
+// Time complexity:- O(nlogn + n) = O(nlogn)
+// Space complexity:- O(n)
+
+TreeNode* buildTree(vector<int>& preorder, unordered_map<int,int>& mp, int &i, int l, int r)
+{
+    if(l>r)
+        return NULL;
+
+    TreeNode* root = new TreeNode(preorder[i]);
+    i++;
+
+    if(l==r)
+        return root;
+    int ind = mp[root->val];
+    root->left = buildTree(preorder,mp,i,l,ind-1);
+    root->right = buildTree(preorder,mp,i,ind+1,r);
+
+    return root;
+}
+    
+    
+
+
+TreeNode* Solution::constructBST(vector<int> &preorder) 
+{
+    vector<int> inorder = preorder;
+    sort(inorder.begin(),inorder.end());
+    unordered_map<int,int> mp;
+    for(int i=0;i<inorder.size();i++)
+    {
+        mp[inorder[i]]=i;
+    }
+    int i = 0;
+    return buildTree(preorder,mp,i,0,preorder.size()-1);
+}
+
