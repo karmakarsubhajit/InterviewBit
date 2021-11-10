@@ -57,6 +57,40 @@ We can see that is the tree created by the given pre order traversal.
 
 */
 
+
+
+// Time complexity:- O(n^2)
+// Space complexity:- O(n)
+
+TreeNode* buildTree(vector<int>& preorder, int l, int r)
+    {
+        if(l>r)
+            return NULL;
+        TreeNode* root = new TreeNode(preorder[l]);
+        if(l==r)
+            return root;
+        int i = l+1;
+        for(;i<=r;i++)
+        {
+            if(preorder[i]>root->val)
+            {
+                break;
+            }
+        }
+        root->left = buildTree(preorder,l+1,i-1);
+        root->right = buildTree(preorder,i,r);
+        return root;
+    }
+    
+    
+
+TreeNode* Solution::constructBST(vector<int> &preorder) 
+{
+    return buildTree(preorder,0,preorder.size()-1);
+}
+
+
+
 // Using insert node function of BST
 // Time complexity:- O(n^2)
 // Space complexity:- O(n)
