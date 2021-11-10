@@ -57,32 +57,6 @@ We can see that is the tree created by the given pre order traversal.
 
 */
 
-// Using lower bound and upper bound of a node in BST
-// Time complexity:- O(n)
-// Space complexity:- O(n)
-
-TreeNode* buildTree(vector<int>& preorder, int &i, int upper_limit)
-{
-    if(i==preorder.size() || preorder[i]>upper_limit)
-    {
-        return NULL;
-    }
-    TreeNode* root = new TreeNode(preorder[i]);
-    i++;
-    root->left = buildTree(preorder,i,root->val-1);
-    root->right = buildTree(preorder,i,upper_limit);
-    return root;
-}
-
-TreeNode* Solution::constructBST(vector<int> &preorder) 
-{
-    int i = 0;
-    return buildTree(preorder,i,INT_MAX);
-}
-
-
-
-
 // Using insert node function of BST
 // Time complexity:- O(n^2)
 // Space complexity:- O(n)
@@ -159,5 +133,29 @@ TreeNode* Solution::constructBST(vector<int> &preorder)
     }
     int i = 0;
     return buildTree(preorder,mp,i,0,preorder.size()-1);
+}
+
+
+// Using lower bound and upper bound of a node in BST | Optimal soln
+// Time complexity:- O(n)
+// Space complexity:- O(n)
+
+TreeNode* buildTree(vector<int>& preorder, int &i, int upper_limit)
+{
+    if(i==preorder.size() || preorder[i]>upper_limit)
+    {
+        return NULL;
+    }
+    TreeNode* root = new TreeNode(preorder[i]);
+    i++;
+    root->left = buildTree(preorder,i,root->val-1);
+    root->right = buildTree(preorder,i,upper_limit);
+    return root;
+}
+
+TreeNode* Solution::constructBST(vector<int> &preorder) 
+{
+    int i = 0;
+    return buildTree(preorder,i,INT_MAX);
 }
 
