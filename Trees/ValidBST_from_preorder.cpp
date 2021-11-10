@@ -18,8 +18,58 @@ A = [7, 7, 10, 10, 9, 5, 2, 8]
 Example Output
 Output 1:
  1
- 
 */
+
+// Brute Force
+// Time complexity:- O(n^2)
+// Space complexity:- O(n)
+
+
+bool checkBST_from_preorder(vector<int> &preorder, int l, int r)
+{
+    if(l>r)
+        return true;
+    int val = preorder[l];
+    if(l==r)
+        return true;
+    bool ans = true;
+
+    int ind=l;
+    int k=l+1;
+    for(;k<=r;k++)
+    {
+        if(preorder[k]>val) 
+        {
+            break;
+        }
+    } 
+    
+    if(k>r)
+        return true;
+    else
+    {
+        ind = k;
+        k++;
+        for(;k<=r;k++)
+        {
+            if(preorder[k]<val)
+            {
+                return false;
+            }
+        }
+        ans = ans ||  checkBST_from_preorder(preorder,l+1,ind-1) ||  checkBST_from_preorder(preorder,ind,r);
+    }
+    
+    return ans;
+}
+
+
+int Solution::solve(vector<int> &preorder) 
+{
+
+    return checkBST_from_preorder(preorder, 0, preorder.size()-1);
+}
+
 
 // Using lower bound and upper bound of a BST node
 // Time complexity:- O(n)
@@ -47,3 +97,7 @@ int Solution::solve(vector<int> &preorder)
     checkBST_from_preorder(preorder, i, INT_MIN, INT_MAX);
     return i==preorder.size();
 }
+
+
+
+
